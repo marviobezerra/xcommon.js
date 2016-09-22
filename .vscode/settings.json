@@ -1,0 +1,17 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+	"editor.insertSpaces": false,
+	"files.exclude": {
+		"/**/.gitignore": true,
+		"/**/tsconfig.json": false,
+		"/**/typings.json": true,
+		"/**/config.bat": true,
+		"/**/clean.bat": true,
+		"bin": true,
+		"/**/lib": true,
+		"deploy": true,
+		"/**/node_modules": true,
+		"/**/typings": true,
+		"LICENSE": true
+	}
+}
