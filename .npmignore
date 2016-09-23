@@ -4,3 +4,6 @@ scr
 gulpfile.js
 tsconfig.json
 node_modules
+typings
+typings.json
+*.map

@@ -1,13 +1,10 @@
 {
   "name": "xcommon",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Tools for TypeScript",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
-  "scripts": {
-    "prepublish": "rimraf lib && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marviobezerra/xcommon.js.git"
@@ -29,9 +26,7 @@
   ],
   "author": "Márvio André Bezerra Silverio",
   "license": "ISC",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@angular/common": "2.0.0",
     "@angular/compiler": "2.0.0",
@@ -50,5 +45,8 @@
     "gulp": "^3.9.1",
     "typescript": "^2.0.3",
     "typings": "^1.4.0"
-  }
+  },
+  "files": [
+    "layout"
+  ]
 }
