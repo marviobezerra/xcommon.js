@@ -2,7 +2,7 @@
 {
 	"editor.insertSpaces": false,
 	"files.exclude": {
-		"/**/.gitignore": true,
+		"/**/.gitignore": false,
 		"/**/tsconfig.json": false,
 		"/**/typings.json": true,
 		"/**/config.bat": true,

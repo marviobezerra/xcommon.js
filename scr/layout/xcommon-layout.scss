@@ -1,0 +1,162 @@
+﻿// XCommon Layout
+$device-small: 1;
+$device-medium: 2;
+$device-large: 3;
+
+$size-small: 420px;
+$size-large: 1024px;
+
+@mixin respond-to($media) {
+    @if $media == $device-small {
+        @media only screen and (max-width: $size-small) {
+            @content;
+        }
+    }
+
+    @if $media == $device-medium {
+        @media only screen and (min-width: $size-small + 1) and (max-width: $size-large) {
+            @content;
+        }
+    }
+
+    @if $media == $device-large {
+        @media only screen and (min-width: $size-large) {
+            @content;
+        }
+    }
+}
+
+$alignOptions: start, end, center, around, stretch, baseline;
+$justifyOptions: start, end, center, between, around;
+
+@function content-translate($option, $justify) {
+
+  @if ($justify) {
+    @if ($option == start) {
+      @return flex-start;
+    }
+
+    @if ($option == end) {
+      @return flex-end;
+    }
+
+    @if ($option == center) {
+      @return center;
+    }
+    
+    @if ($option == between) {
+      @return space-between;
+    }
+
+    @if ($option == around) {
+      @return space-around;
+    }
+
+    @return $option;
+  }
+
+  @if ($option == start) {
+    @return flex-start;
+  }
+
+  @if ($option == end) {
+    @return flex-end;
+  }
+
+  @if ($option == center) {
+    @return center;
+  }
+
+  @if ($option == baseline) {
+    @return baseline;
+  }
+
+  @if ($option == stretch) {
+    @return stretch;
+  }
+
+  @return $option;
+}
+
+@mixin apply-content($size) {
+
+  [#{$size}="start"] {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  [#{$size}="center"] {
+    align-items: center;
+    justify-content: center;
+  }
+
+  [#{$size}="end"] {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  @each $align in $alignOptions {
+    @each $justify in $justifyOptions {
+        [#{$size}="#{$align} #{$justify}"] {
+            align-items: content-translate($align, false);
+          	justify-content: content-translate($justify, true);
+        }
+    }
+  }
+}
+
+@mixin apply-flex($size) {
+  [#{$size}] {
+    flex: 100 0 auto;  
+  }
+  
+  @for $i from 1 through 100 {  
+    [#{$size}="#{$i}"] {
+      flex: $i 0 auto;
+    }
+  }
+}
+
+@mixin apply-layout($size) {
+  [#{$size}],
+  [#{$size}="row"] {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  [#{$size}="column"] {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@mixin apply-hide($size) {
+  [#{$size}] {
+    display: none;
+  }
+}
+
+@include apply-layout(layout);
+@include apply-flex(flex);
+@include apply-content(content);
+@include apply-content(hide);
+
+@include respond-to($device-small) {
+  @include apply-layout(layout-sm);
+  @include apply-layout(layout-md-sm);
+  @include apply-flex(flex-sm);
+  @include apply-content(content-sm);
+  @include apply-content(content-md-sm);
+  @include apply-hide(hide-sm);
+  @include apply-hide(hide-md-sm);
+}
+
+@include respond-to($device-medium) {
+  @include apply-layout(layout-md);
+  @include apply-layout(layout-md-sm);
+  @include apply-flex(flex-md);
+  @include apply-content(content-md);
+  @include apply-content(content-md-sm);
+  @include apply-hide(hide-md);
+  @include apply-hide(hide-md-sm);
+}
