@@ -18,6 +18,11 @@ export class SpecificationValidation<T> {
 
 		let result: boolean = true;
 
+		if (!entity) {
+			result = false;
+			return result;
+		}
+
 		for (let expression of this.Expressions) {
 
 			if (expression.Condition && !expression.Expression(entity)) {
@@ -33,7 +38,7 @@ export class SpecificationValidation<T> {
 	}
 }
 
-interface ISpecificationExpression<T> {
+export interface ISpecificationExpression<T> {
 	Expression(arg: T): boolean;
 	Condition: boolean;
 	StopIfInvalid: boolean;

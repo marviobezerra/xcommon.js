@@ -1,5 +1,5 @@
 rmdir /s /q lib
-mkdir -p lib\layout
+mkdir -p lib\style
 copy package.json lib\
-copy scr\layout\xcommon-layout.scss lib\layout\
+copy scr\style\xcommon-layout.scss lib\style\
 call tsc

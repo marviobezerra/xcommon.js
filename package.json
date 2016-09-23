@@ -47,6 +47,6 @@
     "typings": "^1.4.0"
   },
   "files": [
-    "layout"
+    "style"
   ]
 }
