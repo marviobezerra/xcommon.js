@@ -1,32 +1,36 @@
+import { Execute, ExecuteMessageType } from "./execute";
+import "extensions";
+
 export class SpecificationValidation<T> {
 	constructor() {
 	}
 
 	private Expressions: ISpecificationExpression<T>[] = [];
 
-	public And(expression: { (arg: T): boolean }, condition: boolean = true, stopIfInvalid: boolean = false): SpecificationValidation<T> {
-		this.Expressions.push({ Expression: expression, Condition: condition, StopIfInvalid: stopIfInvalid });
+	public And(expression: { (arg: T): boolean }, message: string, stopIfInvalid: boolean = false): SpecificationValidation<T> {
+		this.Expressions.push({ Expression: expression, Message: message, StopIfInvalid: stopIfInvalid });
 		return this;
 	}
 
-	public Or(expression1: { (arg: T): boolean }, expression2: { (arg: T): boolean }, condition: boolean = true, stopIfInvalid: boolean = false): SpecificationValidation<T> {
-		this.Expressions.push({ Expression: (arg: T) => expression1(arg) || expression2(arg), Condition: condition, StopIfInvalid: stopIfInvalid });
+	public Or(expression1: { (arg: T): boolean }, expression2: { (arg: T): boolean }, message: string, stopIfInvalid: boolean = false): SpecificationValidation<T> {
+		this.Expressions.push({ Expression: (arg: T) => expression1(arg) || expression2(arg), Message: message, StopIfInvalid: stopIfInvalid });
 		return this;
 	}
 
-	public Validate(entity: T): boolean {
+	public IsSatisfiedBy(entity: T): boolean;
+	public IsSatisfiedBy(entity: T, execute: Execute = null): boolean {
 
-		let result: boolean = true;
+		execute = execute || new Execute();
 
 		if (!entity) {
-			result = false;
-			return result;
+			execute.AddMessage(ExecuteMessageType.Error, "Entity can't be null");
+			return execute.HasErro;
 		}
 
 		for (let expression of this.Expressions) {
 
-			if (expression.Condition && !expression.Expression(entity)) {
-				result = false;
+			if (!expression.Expression(entity)) {
+				execute.AddMessage(ExecuteMessageType.Error, expression.Message);
 
 				if (expression.StopIfInvalid) {
 					break;
@@ -34,12 +38,12 @@ export class SpecificationValidation<T> {
 			}
 		}
 
-		return result;
+		return execute.HasErro;
 	}
 }
 
 export interface ISpecificationExpression<T> {
 	Expression(arg: T): boolean;
-	Condition: boolean;
+	Message: string;
 	StopIfInvalid: boolean;
 }

@@ -48,19 +48,3 @@ export class Execute {
 			this.HasException = this.Messages.any((c: ExecuteMessage) => c.Type == ExecuteMessageType.Exception);
 	}
 }
-
-declare global {
-    interface Array<T> {
-        any(arg: { (arg: T): boolean }): boolean;
-    }
-}
-
-Array.prototype.any = function <T>(arg: { (arg: any): boolean }): boolean {
-	for (let item in this) {
-		if (arg(item)) {
-			return true;
-		}
-	}
-
-	return false;
-}
