@@ -88,10 +88,10 @@ export class Execute {
 
 export class ExecuteT<T> extends Execute {
 	constructor()
-	constructor(execute?: Execute, entity?: T);
+	constructor(entity?: T);
 	constructor(execute?: Execute);
-	constructor(entity?: T) {
-		super();
+	constructor(execute?: Execute, entity?: T) {
+		super(execute);
 		this.Entity = entity;
 	}
 	public Entity: T;
