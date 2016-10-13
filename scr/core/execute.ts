@@ -1,3 +1,5 @@
+import { ArrayUtil } from "./extensions";
+
 export enum ExecuteMessageType {
 	Error = 1,
 	Warning = 2,
@@ -51,19 +53,19 @@ export class Execute {
 	public AddMessage(info: ExecuteMessageType | Error | Execute, message?: string): void {
 		if (typeof info === "number") {
 			this.Messages.push(new ExecuteMessage(info, message));
-			return;
 		}
 
 		if (info instanceof Error) {
+			console.log("Teste");
 			let internal: ExecuteMessageInternal = new ExecuteMessageInternal(info);
 			this.Messages.push(new ExecuteMessage(ExecuteMessageType.Error, message, internal));
-			return;
 		}
 
 		if (info instanceof Execute) {
 			this.Merge(info);
-			return;
-		}	
+		}
+
+		this.CheckMessages();
 	}
 
 	private Merge(execute: Execute): void {
@@ -76,13 +78,13 @@ export class Execute {
 
 	private CheckMessages(): void {
 		if (!this.HasWarning)
-			this.HasWarning = this.Messages.any((c: ExecuteMessage) => c.Type == ExecuteMessageType.Warning);
+			this.HasWarning = this.Messages.some((c: ExecuteMessage) => c.Type == ExecuteMessageType.Warning);
 
 		if (!this.HasErro)
-			this.HasErro = this.Messages.any((c: ExecuteMessage) => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
+			this.HasErro = this.Messages.some((c: ExecuteMessage) => c.Type == ExecuteMessageType.Error || c.Type == ExecuteMessageType.Exception);
 
 		if (!this.HasException)
-			this.HasException = this.Messages.any((c: ExecuteMessage) => c.Type == ExecuteMessageType.Exception);
+			this.HasException = this.Messages.some((c: ExecuteMessage) => c.Type == ExecuteMessageType.Exception);
 	}
 }
 

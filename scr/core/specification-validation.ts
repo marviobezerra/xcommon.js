@@ -1,5 +1,4 @@
 import { Execute, ExecuteMessageType } from "./execute";
-import "extensions";
 
 export class SpecificationValidation<T> {
 	constructor() {
