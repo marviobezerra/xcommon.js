@@ -5,14 +5,16 @@ var gulp = require("gulp"),
     webpack = require("webpack"),
     webpackStream = require("webpack-stream"),
     connect = require("gulp-connect"),
-	open = require("gulp-open"),
+    open = require("gulp-open"),
+    jasmine = require("gulp-jasmine"),
     runSequence = require("run-sequence");
 
 var helper = {
     tasks: {
-        clear: "clear",        
+        clear: "clear",
         test: {
-			open: "test:open",
+            run: "test:run",
+            open: "test:open",
             watch: "test:watch",
             server: "test:server",
             compile: "test:compile"
@@ -32,30 +34,36 @@ var helper = {
             lib: "./lib"
         }
     },
-    webpack: function () {
-        var result = Object.create(require("./webpack.config.js"));
+    webpack: {
+        watch: false,
+        parse: function () {
+            var result = Object.create(require("./webpack.config.js"));
 
-        result.debug = true;
-        result.devtool = "source-map";
-        result.watch = true;
-        result.plugins = result.plugins || [];
-        result.plugins.push(helper.webPackLog);
-
-        return result;
-    },
-    webPackLog: function () {
-        this.plugin("done", function (stats) {
-            if (stats.compilation.errors && stats.compilation.errors.length) {
-                console.log("");
-                console.log("********************************************************************************");
-                console.log("********************************   ERROR   *************************************");
-                console.log("");
-                console.log(stats.compilation.errors);
-                console.log("********************************************************************************");
-                console.log("");
-                stats.compilation.errors = [];
+            if (helper.webpack.watch) {
+                result.devtool = "source-map";
             }
-        });
+
+            result.debug = helper.webpack.watch;
+            result.watch = helper.webpack.watch;
+            result.plugins = result.plugins || [];
+            result.plugins.push(helper.webpack.log);
+
+            return result;
+        },
+        log: function () {
+            this.plugin("done", function (stats) {
+                if (stats.compilation.errors && stats.compilation.errors.length) {
+                    console.log("");
+                    console.log("********************************************************************************");
+                    console.log("********************************   ERROR   *************************************");
+                    console.log("");
+                    console.log(stats.compilation.errors);
+                    console.log("********************************************************************************");
+                    console.log("");
+                    stats.compilation.errors = [];
+                }
+            });
+        }
     }
 };
 
@@ -64,22 +72,27 @@ gulp.task(helper.tasks.clear, function () {
         .pipe(rimraf());
 });
 
-gulp.task(helper.tasks.test.compile, function () {
+gulp.task(helper.tasks.test.run, [helper.tasks.test.compile], function () {
+    gulp.src("./test/runner/spec/index.spec.js")
+        .pipe(jasmine())
+});
+
+gulp.task(helper.tasks.test.compile, [helper.tasks.clear], function () {
 
     return gulp.src(helper.path.test.root + "index.html", { read: false })
-        .pipe(webpackStream(helper.webpack()))
+        .pipe(webpackStream(helper.webpack.parse()))
         .pipe(gulp.dest(helper.path.test.spec))
         .pipe(livereload());
 });
 
 gulp.task(helper.tasks.test.open, function () {
     var options = {
-		uri: "http:/localhost:38081",
-		app: "chrome"
-	};
-	
-	gulp.src(__filename)
-		.pipe(open(options));
+        uri: "http:/localhost:38081",
+        app: "chrome"
+    };
+
+    gulp.src(__filename)
+        .pipe(open(options));
 })
 
 gulp.task(helper.tasks.test.server, function () {
@@ -97,11 +110,11 @@ gulp.task(helper.tasks.test.server, function () {
 
 gulp.task(helper.tasks.test.watch, function () {
 
+    helper.webpack.watch = true;
     gulp.watch([helper.path.source.lib, helper.path.test.spec], [helper.tasks.compile.test]);
 
     return runSequence(
-        helper.tasks.clear,
-		helper.tasks.test.open,
+        helper.tasks.test.open,
         [
             helper.tasks.test.compile,
             helper.tasks.test.server

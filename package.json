@@ -48,6 +48,7 @@
     "@types/node": "^6.0.45",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
+    "gulp-jasmine": "^2.4.2",
     "gulp-livereload": "^3.8.1",
     "gulp-open": "^2.0.0",
     "gulp-rimraf": "^0.2.1",

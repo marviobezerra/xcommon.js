@@ -9,12 +9,9 @@ module.exports = {
 		path: path.join(__dirname, "test", "runner", "spec"),
 		filename: "index.spec.js"
 	},
-	devtool: "source-map",
-	watch: false,
 	resolve: {
 	    extensions: [".js", ".ts"]
 	},
-
 	module: {
 		loaders: [
 			{
