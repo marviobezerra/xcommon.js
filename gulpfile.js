@@ -5,12 +5,14 @@ var gulp = require("gulp"),
     webpack = require("webpack"),
     webpackStream = require("webpack-stream"),
     connect = require("gulp-connect"),
+	open = require("gulp-open"),
     runSequence = require("run-sequence");
 
 var helper = {
     tasks: {
         clear: "clear",        
         test: {
+			open: "test:open",
             watch: "test:watch",
             server: "test:server",
             compile: "test:compile"
@@ -70,6 +72,16 @@ gulp.task(helper.tasks.test.compile, function () {
         .pipe(livereload());
 });
 
+gulp.task(helper.tasks.test.open, function () {
+    var options = {
+		uri: "http:/localhost:38081",
+		app: "chrome"
+	};
+	
+	gulp.src(__filename)
+		.pipe(open(options));
+})
+
 gulp.task(helper.tasks.test.server, function () {
     livereload.listen({
         port: 38082
@@ -89,6 +101,7 @@ gulp.task(helper.tasks.test.watch, function () {
 
     return runSequence(
         helper.tasks.clear,
+		helper.tasks.test.open,
         [
             helper.tasks.test.compile,
             helper.tasks.test.server
