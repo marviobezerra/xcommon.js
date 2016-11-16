@@ -5,8 +5,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "pretest": "rimraf lib && tsc",
-    "test": "mocha --reporter spec lib/test/**/*.js"
+    "postinstall": "typings install"
   },
   "repository": {
     "type": "git",
