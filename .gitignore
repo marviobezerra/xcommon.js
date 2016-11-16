@@ -28,6 +28,7 @@ build/Release
 
 # Dependency directories
 node_modules
+typings
 jspm_packages
 
 # Optional npm cache directory
@@ -36,4 +37,6 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# Project files
 lib
+test/runner/spec

@@ -56,9 +56,8 @@ export class Execute {
 		}
 
 		if (info instanceof Error) {
-			console.log("Teste");
 			let internal: ExecuteMessageInternal = new ExecuteMessageInternal(info);
-			this.Messages.push(new ExecuteMessage(ExecuteMessageType.Error, message, internal));
+			this.Messages.push(new ExecuteMessage(ExecuteMessageType.Exception, message, internal));
 		}
 
 		if (info instanceof Execute) {
