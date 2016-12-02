@@ -30,7 +30,7 @@ var helper = {
             spec: "./test/runner/spec"
         },
         source: {
-            root: "./scr",
+            root: "./src",
             lib: "./lib"
         }
     },

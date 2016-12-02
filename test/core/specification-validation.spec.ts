@@ -1,4 +1,4 @@
-import { Execute, ExecuteMessageType } from "../../scr/core";
+import { Execute, ExecuteMessageType } from "../../src/core";
 
 describe("Execute", () => {
 	it("Default state", () => {
