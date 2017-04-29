@@ -2,9 +2,9 @@
     "typescript.tsdk": "./node_modules/typescript/lib",
     "editor.insertSpaces": false,
     "files.exclude": {
-        ".npmignore": false,
-        ".gitignore": false,
-        "test/runner": false,
+        ".npmignore": true,
+        ".gitignore": true,
+        "test/runner": true,
         "node_modules": true,
         "LICENSE": true
     }
