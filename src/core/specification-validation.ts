@@ -1,4 +1,4 @@
-import { Execute, ExecuteMessageType } from "./execute";
+import { Execute, ExecuteMessageType } from './execute';
 
 export class SpecificationValidation<T> {
 	constructor() {
@@ -22,7 +22,7 @@ export class SpecificationValidation<T> {
 		execute = execute || new Execute();
 
 		if (!entity) {
-			execute.AddMessage(ExecuteMessageType.Error, "Entity can't be null");
+			execute.AddMessage(ExecuteMessageType.Error, 'Entity can\'t be null');
 			return execute.HasErro;
 		}
 

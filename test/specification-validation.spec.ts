@@ -1,4 +1,4 @@
-import { Execute, ExecuteMessageType } from "../../src/core";
+import { Execute, ExecuteMessageType } from "../src/core";
 
 describe("Execute", () => {
 	it("Default state", () => {

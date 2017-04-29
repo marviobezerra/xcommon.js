@@ -1,4 +1,4 @@
-import { ArrayUtil } from "./extensions";
+import { ArrayUtil } from './extensions';
 
 export enum ExecuteMessageType {
 	Error = 1,
@@ -51,7 +51,7 @@ export class Execute {
 	public AddMessage(messageType: ExecuteMessageType, message: string): void;
 	public AddMessage(erro: Error, message: string): void;
 	public AddMessage(info: ExecuteMessageType | Error | Execute, message?: string): void {
-		if (typeof info === "number") {
+		if (typeof info === 'number') {
 			this.Messages.push(new ExecuteMessage(info, message));
 		}
 

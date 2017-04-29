@@ -1,15 +1,11 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-	"typescript.tsdk": "./node_modules/typescript/lib",
-	"editor.insertSpaces": false,
-	"files.exclude": {
-		".npmignore" : true,
-		".gitignore": true,
-		"tsconfig.json": true,
-		"typings.json": true,
-		"lib": true,
-		"node_modules": true,
-		"typings": true,
-		"LICENSE": true
-	}
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.insertSpaces": false,
+    "files.exclude": {
+        ".npmignore": true,
+        ".gitignore": true,
+        "test/runner": true,
+        "node_modules": true,
+        "LICENSE": true
+    }
 }

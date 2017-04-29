@@ -9,7 +9,7 @@ describe("Simple test", () => {
 		expect(1).toBe(1);
 	});
 
-	it("Teste work!!!", () => {
+	it("Teste work!", () => {
 		let x: number = 1;
 		expect(1).toBe(1);
 	});
