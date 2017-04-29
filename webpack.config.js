@@ -3,7 +3,7 @@ var path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin');
+    autoprefixer = require("autoprefixer");
 
 console.log('@@@@@@@@@ USING DEVELOPMENT @@@@@@@@@@@@@@@');
 
@@ -58,12 +58,12 @@ module.exports = {
             {
                 exclude: /(node_modules|app)$/,
                 test: /(app-style.scss|layout.scss)$/,
-                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
+                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader'] })
             },
             {
                 exclude: /(node_modules|layout.scss|app-style.scss)$/,
                 test: /\.scss$/,
-                use: ['to-string-loader', 'style-loader', 'css-loader', 'sass-loader']
+                use: ['to-string-loader', 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.html$/,
@@ -75,15 +75,18 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'] }),
         new ExtractTextPlugin('dist/[name].css'),
-        new CleanWebpackPlugin(
-            [
-                './wwwroot/*'
-            ]
-        ),
         new CopyWebpackPlugin([{
             from: './test/runner',
             to: './test/'
         }]),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: __dirname,
+                postcss: [
+                    autoprefixer
+                ]
+            }
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             inject: 'body',

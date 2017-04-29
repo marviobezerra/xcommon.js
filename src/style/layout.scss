@@ -1,4 +1,93 @@
-body {
-    height: 100%;
-    width: 100%;
+@import './layout-core.scss';
+@import './functions.scss';
+@mixin apply-all($step) {
+    @include mixin-layout(layout);
+    @include mixin-flex(flex, $step);
+    @include mixin-content(content);
+    @include mixin-hide(hide);
+    @include mixin-fill(fill);
+    @include respond-to($device-small) {
+        @include mixin-layout(layout-sm);
+        @include mixin-layout(layout-sm-md);
+        @include mixin-flex(flex-sm, $step);
+        @include mixin-flex(flex-sm-md, $step);
+        @include mixin-content(content-sm);
+        @include mixin-content(content-sm-md);
+        @include mixin-hide(hide-sm);
+        @include mixin-hide(hide-sm-md);
+        @include mixin-fill(fill-sm);
+        @include mixin-fill(fill-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-layout(layout-md);
+        @include mixin-layout(layout-md-sm);
+        @include mixin-flex(flex-md, $step);
+        @include mixin-flex(flex-sm-md, $step);
+        @include mixin-content(content-md);
+        @include mixin-content(content-sm-md);
+        @include mixin-hide(hide-md);
+        @include mixin-hide(hide-sm-md);
+        @include mixin-fill(fill-md);
+        @include mixin-fill(fill-sm-md);
+    }
+}
+
+@mixin apply-layout() {
+    @include mixin-layout(layout);
+    @include respond-to($device-small) {
+        @include mixin-layout(layout-sm);
+        @include mixin-layout(layout-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-layout(layout-md);
+        @include mixin-layout(layout-sm-md);
+    }
+}
+
+@mixin apply-flex($step) {
+    @include mixin-flex(flex, $step);
+    @include respond-to($device-small) {
+        @include mixin-flex(flex-sm, $step);
+        @include mixin-flex(flex-sm-md, $step);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-flex(flex-md, $step);
+        @include mixin-flex(flex-sm-md, $step);
+    }
+}
+
+@mixin apply-content() {
+    @include mixin-content(content);
+    @include respond-to($device-small) {
+        @include mixin-content(content-sm);
+        @include mixin-content(content-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-content(content-md);
+        @include mixin-content(content-sm-md);
+    }
+}
+
+@mixin apply-hide() {
+    @include mixin-hide(hide);
+    @include respond-to($device-small) {
+        @include mixin-hide(hide-sm);
+        @include mixin-hide(hide-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-hide(hide-md);
+        @include mixin-hide(hide-sm-md);
+    }
+}
+
+@mixin apply-fill() {
+    @include mixin-fill(fill);
+    @include respond-to($device-small) {
+        @include mixin-fill(fill-sm);
+        @include mixin-fill(fill-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-fill(fill-md);
+        @include mixin-fill(fill-sm-md);
+    }
 }

@@ -1,0 +1,42 @@
+$device-small: 1;
+$device-medium: 2;
+$device-large: 3;
+$size-small: 420px;
+$size-large: 1024px;
+@mixin shadow($depth) {
+    @if $depth < 1 {
+        box-shadow: none;
+    }
+    @else if $depth>5 {
+        @warn "Invalid $depth `#{$depth}` for mixin `card`.";
+    }
+    @else {
+        box-shadow: shadow-bottom($depth), shadow-top($depth);
+    }
+}
+
+@mixin parallax($image-url) {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url($image-url);
+}
+
+@mixin respond-to($media) {
+    @if $media==$device-small {
+        @media only screen and (max-width: $size-small) {
+            @content;
+        }
+    }
+    @if $media==$device-medium {
+        @media only screen and (min-width: $size-small + 1) and (max-width: $size-large) {
+            @content;
+        }
+    }
+    @if $media==$device-large {
+        @media only screen and (min-width: $size-large) {
+            @content;
+        }
+    }
+}
