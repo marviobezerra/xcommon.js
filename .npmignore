@@ -1,7 +1,8 @@
 .vscode
-demo-app
+demo
 scr
-gulpfile.js
+test
+wwwroot
 tsconfig.json
 node_modules
 typings

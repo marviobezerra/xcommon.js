@@ -14,6 +14,11 @@ module.exports = {
         hints: false
     },
     entry: {
+        'polyfills': './demo/polyfills.ts',
+        'vendor': './demo/vendor.ts',
+        'main': './demo/main.ts',
+        'app-style': './demo/styles/app-style.scss',
+        // Lib
         'angular': './src/angular/index.ts',
         'core': './src/core/index.ts',
         'test': './test/index.spec.ts',
@@ -39,37 +44,37 @@ module.exports = {
     module: {
         rules: [{
                 test: /\.ts$/,
-                loaders: [
+                use: [
                     'awesome-typescript-loader',
+                    'angular-router-loader',
+                    'angular2-template-loader',
                     'source-map-loader'
                 ]
             },
             {
                 test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,
-                loader: 'file-loader?name=assets/[name].[ext]'
+                use: 'file-loader?name=assets/[name].[ext]'
             },
             {
-                test: /\layout.scss$/,
-                loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
+                exclude: /(node_modules|app)$/,
+                test: /(app-style.scss|layout.scss)$/,
+                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
             },
             {
-                test: /\.css$/,
-                loaders: 'style-loader!css-loader'
-            },
-            {
+                exclude: /(node_modules|layout.scss|app-style.scss)$/,
                 test: /\.scss$/,
-                exclude: /(node_modules|layout.scss)/,
-                loaders: ['to-string-loader', 'style-loader', 'css-loader', 'sass-loader']
+                use: ['to-string-loader', 'style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.html$/,
-                loader: 'raw-loader'
+                use: 'raw-loader'
             }
         ],
         exprContextCritical: false
     },
     plugins: [
-        new ExtractTextPlugin('dist/layout.css'),
+        new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'] }),
+        new ExtractTextPlugin('dist/[name].css'),
         new CleanWebpackPlugin(
             [
                 './wwwroot/*'
@@ -80,7 +85,15 @@ module.exports = {
             to: './test/'
         }]),
         new HtmlWebpackPlugin({
-            filename: '../index.html',
+            filename: 'index.html',
+            inject: 'body',
+            template: 'demo/index.html',
+            excludeChunks: [
+                'angular',
+                'core',
+                'test',
+                'layout'
+            ]
         })
     ]
 };

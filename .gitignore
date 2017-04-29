@@ -39,5 +39,4 @@ jspm_packages
 
 # Project files
 lib
-!test/runner/lib
-test/runner/spec
+wwwroot
