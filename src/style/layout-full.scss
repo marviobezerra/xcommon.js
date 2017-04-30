@@ -1,8 +1,0 @@
-@import './layout.scss';
-@import './functions.scss';
-@include apply-all(5);
-@for $i from 0 through 5 {
-    [shadow="#{$i}"] {
-        @include shadow($i);
-    }
-}
