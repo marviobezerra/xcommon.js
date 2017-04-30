@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>XCommon.js</title>
+    <script>
+  // See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
+  (function(){
+    var redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
+  })();
+</script>
 <link href="/XCommon.js/dist/main.css" rel="stylesheet"><link href="/XCommon.js/dist/app-style.css" rel="stylesheet"></head>
 
 <body layout="column" flex>
