@@ -2,7 +2,10 @@
     <a href="/test">
 		Test
 	</a>
+    <a [routerLink]="['/flex']">
+		Test
+	</a>
 </md-toolbar>
-<div class="layout">
+<div class="layout" layout="column" flex>
     <router-outlet></router-outlet>
 </div>
