@@ -4,7 +4,7 @@
     "files.exclude": {
         ".npmignore": true,
         ".gitignore": true,
-        "test/runner": true,
+        "test/runner": false,
         "node_modules": true,
         "LICENSE": true
     }
