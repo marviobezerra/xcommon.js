@@ -4,7 +4,8 @@
     "files.exclude": {
         ".npmignore": true,
         ".gitignore": true,
-        "test/runner": true,
+        ".vs": true,
+        "test": true,
         "lib": true,
         "wwwroot": true,
         "node_modules": true,

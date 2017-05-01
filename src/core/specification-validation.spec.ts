@@ -1,6 +1,6 @@
-import { Execute, ExecuteMessageType } from "../src/core";
+import { Execute, ExecuteMessageType } from "./";
 
-describe("Execute", () => {
+describe("Core: Execute", () => {
 	it("Default state", () => {
 		let execute = new Execute();
 

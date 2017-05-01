@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
+import { XCommonModule } from '../../src/angular/';
 import { AppRoutes, AppBoostrap, AppComponents } from './app.routes';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AppRoutes, AppBoostrap, AppComponents } from './app.routes';
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
+        XCommonModule,
         AppRoutes
     ],
     declarations: [

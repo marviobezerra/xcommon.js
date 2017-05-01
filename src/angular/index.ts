@@ -1,1 +1,1 @@
-export * from './auto-form';
+export * from './xcommon.module';

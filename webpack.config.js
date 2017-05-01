@@ -21,7 +21,7 @@ module.exports = {
         // Lib
         'angular': './src/angular/index.ts',
         'core': './src/core/index.ts',
-        'test': './test/index.spec.ts',
+        'test': './src/index.spec.ts',
         'layout': './src/style/layout.scss'
     },
     output: {
