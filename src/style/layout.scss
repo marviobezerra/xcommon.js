@@ -6,6 +6,7 @@
     @include mixin-content(content);
     @include mixin-hide(hide);
     @include mixin-fill(fill);
+    @include mixin-wrap(wrap);
     @include respond-to($device-small) {
         @include mixin-layout(layout-sm);
         @include mixin-layout(layout-sm-md);
@@ -17,6 +18,8 @@
         @include mixin-hide(hide-sm-md);
         @include mixin-fill(fill-sm);
         @include mixin-fill(fill-sm-md);
+        @include mixin-wrap(wrap-sm);
+        @include mixin-wrap(wrap-sm-md);
     }
     @include respond-to($device-medium) {
         @include mixin-layout(layout-md);
@@ -29,6 +32,8 @@
         @include mixin-hide(hide-sm-md);
         @include mixin-fill(fill-md);
         @include mixin-fill(fill-sm-md);
+        @include mixin-wrap(wrap-sm);
+        @include mixin-wrap(wrap-sm-md);
     }
 }
 
@@ -89,5 +94,17 @@
     @include respond-to($device-medium) {
         @include mixin-fill(fill-md);
         @include mixin-fill(fill-sm-md);
+    }
+}
+
+@mixin apply-wrap() {
+    @include mixin-wrap(wrap);
+    @include respond-to($device-small) {
+        @include mixin-wrap(wrap-sm);
+        @include mixin-wrap(wrap-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-wrap(wrap-md);
+        @include mixin-wrap(wrap-sm-md);
     }
 }

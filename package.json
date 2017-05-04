@@ -27,7 +27,8 @@
   ],
   "scripts": {
     "clean": "rimraf wwwroot && rimraf lib",
-    "build:dev": "npm run clean && webpack-dev-server --progress --colors --hot --inline --open",
+    "build:dll": "webpack --config webpack.dll.js",
+    "build:dev": "npm run clean && npm run build:dll && webpack-dev-server --progress --colors --hot --inline --open",
     "build:pro": "npm run clean && tsc -p ./tsconfig.prod.json && npm run style",
     "style": "npm run style:sass && npm run style:css && npm run style:css:post",
     "style:sass": "copyfiles -f ./src/style/*.scss ./lib/style",
@@ -58,6 +59,7 @@
     "@types/core-js": "^0.9.41",
     "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.14",
+    "add-asset-html-webpack-plugin": "^2.0.1",
     "angular-router-loader": "^0.6.0",
     "angular2-template-loader": "^0.6.2",
     "autoprefixer": "^6.7.7",

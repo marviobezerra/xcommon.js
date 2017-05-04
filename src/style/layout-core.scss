@@ -10,7 +10,7 @@ center,
 between,
 around;
 @function content-translate($option, $justify) {
-    @if ($justify) {
+    @if ($justify==true) {
         @if ($option==start) {
             @return flex-start;
         }
@@ -28,22 +28,24 @@ around;
         }
         @return $option;
     }
-    @if ($option==start) {
-        @return flex-start;
+    @if ($justify==false) {
+        @if ($option==start) {
+            @return flex-start;
+        }
+        @if ($option==end) {
+            @return flex-end;
+        }
+        @if ($option==center) {
+            @return center;
+        }
+        @if ($option==baseline) {
+            @return baseline;
+        }
+        @if ($option==stretch) {
+            @return stretch;
+        }
+        @return $option;
     }
-    @if ($option==end) {
-        @return flex-end;
-    }
-    @if ($option==center) {
-        @return center;
-    }
-    @if ($option==baseline) {
-        @return baseline;
-    }
-    @if ($option==stretch) {
-        @return stretch;
-    }
-    @return $option;
 }
 
 @mixin mixin-content($name) {
@@ -98,6 +100,19 @@ around;
 @mixin mixin-hide($name) {
     [#{$name}] {
         display: none;
+    }
+}
+
+@mixin mixin-wrap($name) {
+    [#{$name}],
+    [#{$name}="wrap"] {
+        flex-wrap: wrap;
+    }
+    [#{$name}="nowrap"] {
+        flex-wrap: nowrap;
+    }
+    [#{$name}="reverse"] {
+        flex-wrap: wrap-reverse;
     }
 }
 

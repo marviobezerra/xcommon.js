@@ -1,0 +1,23 @@
+.simple-flex {
+    .example-radio-group {
+        display: inline-flex;
+        flex-direction: column;
+    }
+    .example-radio-button {
+        margin: 5px;
+    }
+    .example-selected-value {
+        margin: 15px 0;
+    }
+    .control {
+        margin: 25px 0;
+    }
+    .demo {
+        border: 3px solid black;
+        overflow: scroll;
+    }
+    flex-element {
+        height: 150px;
+        width: 150px;
+    }
+}

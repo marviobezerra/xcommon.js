@@ -5,7 +5,7 @@
         ".npmignore": true,
         ".gitignore": true,
         ".vs": true,
-        "test": true,
+        "test": false,
         "lib": true,
         "wwwroot": true,
         "node_modules": true,

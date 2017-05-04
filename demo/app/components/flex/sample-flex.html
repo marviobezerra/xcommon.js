@@ -1,0 +1,47 @@
+<div class="simple-flex" layout="row" flex>
+    <div class="control" layout="column" flex="30">
+        <div layout="column">
+            <span>Layout</span>
+            <md-radio-group class="example-radio-group" [(ngModel)]="LayoutValue">
+                <md-radio-button class="example-radio-button" value="row">Row</md-radio-button>
+                <md-radio-button class="example-radio-button" value="column">Column</md-radio-button>
+            </md-radio-group>
+        </div>
+        <div layout="row">
+            <div layout="column">
+                <span>Aling</span>
+                <md-radio-group class="example-radio-group" [(ngModel)]="AlingValue">
+                    <md-radio-button class="example-radio-button" value="start">Start</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="end">End</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="center">Center</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="around">Around</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="stretch">Stretch</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="baseline">Baseline</md-radio-button>
+                </md-radio-group>
+            </div>
+            <div layout="column">
+                <span>Justify</span>
+                <md-radio-group class="example-radio-group" [(ngModel)]="JustifyValue">
+                    <md-radio-button class="example-radio-button" value="start">Start</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="end">End</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="center">Center</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="around">Around</md-radio-button>
+                    <md-radio-button class="example-radio-button" value="between">Between</md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+        <div layout="column">
+            <button (click)="SetScreenSize()">Calc Screen Size</button>
+            <button (click)="NewItem()">Add new Item</button>
+        </div>
+        <div layout="column" *ngIf="Item">
+
+            <span>Item edit</span>
+            <input type="text" [(ngModel)]="Item.Text" />
+            <input type="checkbox" [(ngModel)]="Item.Flex" />
+        </div>
+    </div>
+    <div class="demo" [attr.layout]="LayoutValue" [attr.content]="GetContent()" flex="70" wrap [style.width.px]="DemoWidth" [style.height.px]="DemoHeight">
+        <flex-element *ngFor="let item of Items" [Entity]="item" (ItemSelected)="LoadItem($event)"></flex-element>
+    </div>
+</div>

@@ -2,6 +2,7 @@ var path = require('path'),
     webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     autoprefixer = require("autoprefixer");
 
@@ -9,7 +10,7 @@ console.log('@@@@@@@@@ USING DEVELOPMENT @@@@@@@@@@@@@@@');
 
 module.exports = {
     cache: true,
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
     performance: {
         hints: false
     },
@@ -73,6 +74,10 @@ module.exports = {
         exprContextCritical: false
     },
     plugins: [
+        new webpack.DllReferencePlugin({
+            context: process.cwd(),
+            manifest: require(path.join(__dirname, 'wwwroot', 'dist', 'AngularStuff.json'))
+        }),
         new webpack.optimize.CommonsChunkPlugin({ name: ['vendor', 'polyfills'] }),
         new ExtractTextPlugin('dist/[name].css'),
         new CopyWebpackPlugin([{
@@ -97,6 +102,10 @@ module.exports = {
                 'test',
                 'layout'
             ]
+        }),
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve('./wwwroot/dist/AngularStuff.dll.js'),
+            includeSourcemap: false
         })
     ]
 };

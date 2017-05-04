@@ -1,20 +1,27 @@
-export enum Align {
-    Start = <any>'start',
-    Center = <any>'center',
-    Around = <any>'around',
-    Stretch = <any>'stretch',
-    Baseline = <any>'baseline',
+export type Align = 'start' | 'end' | 'center' | 'around' | 'stretch' | 'baseline';
+
+export const Align = {
+    Start: 'start' as Align,
+    End: 'end' as Justify,
+    Center: 'center' as Align,
+    Around: 'around' as Align,
+    Stretch: 'stretch' as Align,
+    Baseline: 'baseline' as Align
 };
 
-export enum Layout {
-    Row = <any>'row',
-    Column = <any>'column'
+export type Layout = 'row' | 'column';
+
+export const  Layout = {
+    Row: 'row' as Layout,
+    Column: 'column' as Layout
 };
 
-export enum Justify {
-    Start = <any>'start',
-    End = <any>'end',
-    Center = <any>'center',
-    Around = <any>'around',
-    Between = <any>'between',
+export type Justify = 'start' | 'end' | 'center' | 'around' | 'between';
+
+export const Justify = {
+    Start: 'start' as Justify,
+    End: 'end' as Justify,
+    Center: 'center' as Justify,
+    Around: 'around' as Justify,
+    Between: 'between' as Justify,
 };
