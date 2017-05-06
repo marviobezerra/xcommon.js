@@ -1,13 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { IconService } from '../../services/icon.service';
 
 @Component({
-	template: `<div>Hey! I'll be a icon soon.<\div>`,
-	styles: [``]
+	selector: 'icon',
+	template: `
+	<svg xmlns='http://www.w3.org/2000/svg' [attr.viewBox]='ViewBox' [attr.width]='Size' [attr.height]='Size' [style.vertical-align]='Align' #iconPath>
+	</svg>`
 })
-export class IconComponent implements OnInit{
-	constructor(){}
+export class IconComponent {
+	@Input('size') Size = 28;
+    @Input('align') Align = 'middle';
+	@Input('icon') set Icon(value: string) {
+        this.dataContainer.nativeElement.innerHTML = this.xIconService.Shapes[value];
+    }
 
-	public ngOnInit() : void {
+	@ViewChild('iconPath') dataContainer: ElementRef;
+    ViewBox = '0 0 24 24';
 
+    constructor(private xIconService: IconService) {
 	}
 }

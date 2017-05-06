@@ -1,10 +1,9 @@
-export type Align = 'start' | 'end' | 'center' | 'around' | 'stretch' | 'baseline';
+export type Align = 'start' | 'end' | 'center' | 'stretch' | 'baseline';
 
 export const Align = {
     Start: 'start' as Align,
     End: 'end' as Justify,
     Center: 'center' as Align,
-    Around: 'around' as Align,
     Stretch: 'stretch' as Align,
     Baseline: 'baseline' as Align
 };
@@ -24,4 +23,12 @@ export const Justify = {
     Center: 'center' as Justify,
     Around: 'around' as Justify,
     Between: 'between' as Justify,
-};
+}; 
+
+export type Wrap = 'wrap' | 'nowrap' | 'reverse';
+
+export const Wrap = {
+    Wrap: 'wrap' as Wrap,
+    NoWrap: 'nowrap' as Wrap,
+    Reverse: 'reverse' as Wrap
+}

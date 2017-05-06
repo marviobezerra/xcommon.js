@@ -1,53 +1,4 @@
-$alignOptions: start,
-end,
-center,
-around,
-stretch,
-baseline;
-$justifyOptions: start,
-end,
-center,
-between,
-around;
-@function content-translate($option, $justify) {
-    @if ($justify==true) {
-        @if ($option==start) {
-            @return flex-start;
-        }
-        @if ($option==end) {
-            @return flex-end;
-        }
-        @if ($option==center) {
-            @return center;
-        }
-        @if ($option==between) {
-            @return space-between;
-        }
-        @if ($option==around) {
-            @return space-around;
-        }
-        @return $option;
-    }
-    @if ($justify==false) {
-        @if ($option==start) {
-            @return flex-start;
-        }
-        @if ($option==end) {
-            @return flex-end;
-        }
-        @if ($option==center) {
-            @return center;
-        }
-        @if ($option==baseline) {
-            @return baseline;
-        }
-        @if ($option==stretch) {
-            @return stretch;
-        }
-        @return $option;
-    }
-}
-
+@import './functions.scss';
 @mixin mixin-content($name) {
     [#{$name}="start"] {
         align-items: flex-start;
@@ -129,16 +80,13 @@ around;
     }
 }
 
-@function shadow-top($depth) {
-    $primary-offset: nth(1.5 3 10 14 19, $depth) * 1px;
-    $blur: nth(1.5 3 10 14 19, $depth) * 4px;
-    $color: rgba(black, nth(.12 .16 .19 .25 .30, $depth));
-    @return 0 $primary-offset $blur $color;
-}
-
-@function shadow-bottom($depth) {
-    $primary-offset: nth(1.5 3 6 10 15, $depth) * 1px;
-    $blur: nth(1 3 3 5 6, $depth) * 4px;
-    $color: rgba(black, nth(.24 .23 .23 .22 .22, $depth));
-    @return 0 $primary-offset $blur $color;
+@mixin mixin-shadow($name) {
+    [#{$name}] {
+        box-shadow: shadow-bottom(2), shadow-top(2);
+    }
+    @for $i from 1 through 5 {
+        [#{$name}="#{$i}"] {
+            box-shadow: shadow-bottom($i), shadow-top($i);
+        }
+    }
 }

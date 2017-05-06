@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Align, Justify, Layout } from '../../../../src/core/layout';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Align, Justify, Layout, Wrap } from '../../../../src/core/layout';
 import { IFlexEntity } from './entity';
 
 @Component({
@@ -7,15 +7,22 @@ import { IFlexEntity } from './entity';
     templateUrl: './sample-flex.html',
     styles: [require('./sample-flex.scss').toString()]
 })
-export class SampleFlexComponent implements OnInit {
+export class SampleFlexComponent implements OnInit, OnDestroy {
 
-    public LayoutValue: any = Layout.Column;
-    public AlingValue: any = Align.Center;
-    public JustifyValue: any = Justify.Center;
+    public LayoutOptions: Array<any> = [];
+    public AlingOptions: Array<any> = [];
+    public JustifyOptions: Array<any> = [];
+    public WrapOptions: Array<any> = [];
+
+    public LayoutValue = Layout.Column;
+    public AlingValue = Align.Center;
+    public JustifyValue = Justify.Center;
+    public WrapValue = Wrap.Wrap;
+
     public Items: Array<IFlexEntity> = [];
-    public Item: IFlexEntity;
-    public DemoHeight: number;
-    public DemoWidth: number;
+    public SelectedItem: IFlexEntity;
+    public ContainerHeight: number;
+    public ContainerWidth: number;
 
     constructor() {
     }
@@ -25,13 +32,13 @@ export class SampleFlexComponent implements OnInit {
     }
 
     public LoadItem(item: IFlexEntity): void {
-        this.Item = item;
+        this.SelectedItem = item;
     }
 
     public NewItem(): void {
         this.Items.push({
             Align: Align.Center,
-            Color: 'red',
+            Color: this.RandonColor(),
             Flex: false,
             FlexSize: 0,
             Justify: Justify.Center,
@@ -39,40 +46,62 @@ export class SampleFlexComponent implements OnInit {
         });
     }
 
-    public SetScreenSize(): void {
-        let x = document.getElementsByClassName('demo')[0];
-        this.DemoHeight = x.clientHeight;
-        this.DemoWidth = x.clientWidth;
+    public CleanItems(): void {
+        this.Items = [];
+        this.SelectedItem = null;
+    }
+
+    private LoadInitialScreenSize(): void {
+        let x = document.getElementsByClassName('container')[0];
+        this.ContainerWidth = x.clientWidth;
+        this.ContainerHeight = x.clientHeight;
+
+        console.log("ContainerWidth", this.ContainerWidth);
+    }
+
+    private RandonColor(): string {
+        return '#' + '0123456789abcdef'.split('').map(function (v, i, a) {
+            return i > 5 ? null : a[Math.floor(Math.random() * 16)]
+        }).join('');
+    }
+
+    private LoadInitialItems(): void {
+        this.NewItem();
+        this.NewItem();
+        this.NewItem();
+    }
+
+    private LoadProperties(): void {
+
+        let align: any = Align;
+        for (let property in align) {
+            this.AlingOptions.push({ text: property, value: align[property] });
+        }
+
+        let justify: any = Justify;
+        for (let property in justify) {
+            this.JustifyOptions.push({ text: property, value: justify[property] });
+        }
+
+        let layout: any = Layout;
+        for (let property in layout) {
+            this.LayoutOptions.push({ text: property, value: layout[property] });
+        }
+
+        let wrap: any = Wrap;
+        for (let property in wrap) {
+            this.WrapOptions.push({ text: property, value: wrap[property] });
+        }
     }
 
     ngOnInit(): void {
-        this.SetScreenSize();
+        document.body.style.overflow = 'hidden';
+        this.LoadProperties();
+        this.LoadInitialScreenSize();
+        this.LoadInitialItems();
+    }
 
-        this.Items.push({
-            Align: Align.Center,
-            Color: 'red',
-            Flex: true,
-            FlexSize: 0,
-            Justify: Justify.Center,
-            Text: 'Item 1'
-        });
-
-        this.Items.push({
-            Align: Align.Center,
-            Color: 'green',
-            Flex: false,
-            FlexSize: 0,
-            Justify: Justify.Center,
-            Text: 'Item 2'
-        });
-
-        this.Items.push({
-            Align: Align.Center,
-            Color: 'blue',
-            Flex: false,
-            FlexSize: 0,
-            Justify: Justify.Center,
-            Text: 'Item 3'
-        });
+    ngOnDestroy(): void {
+        document.body.style.overflow = 'initia';
     }
 }

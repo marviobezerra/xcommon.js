@@ -1,10 +1,23 @@
 ﻿<md-toolbar color="primary" class="mat-elevation-z6">
-    <a href="/test">
-		Test
-	</a>
-    <a [routerLink]="['/flex']">
-		Test
-	</a>
+    <a md-icon-button [routerLink]="['/']" class="icon-white">
+        <icon icon="menu"></icon>
+    </a>
+    <div>
+        XCommon.js
+    </div>
+    <div flex></div>
+    <a md-icon-button [routerLink]="['/icon-list']" class="icon-white">
+        <icon icon="icon-list"></icon>
+    </a>
+    <a md-icon-button [routerLink]="['/form']" class="icon-white">
+        <icon icon="auto-form"></icon>
+    </a>
+    <a md-icon-button [routerLink]="['/flex']" class="icon-white">
+        <icon icon="layout"></icon>
+    </a>
+    <a md-icon-button href="/test" target="_blank" class="icon-white">
+        <icon icon="test"></icon>
+    </a>
 </md-toolbar>
 <div class="layout" layout="column" flex>
     <router-outlet></router-outlet>

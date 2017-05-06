@@ -1,12 +1,13 @@
 @import './layout-core.scss';
 @import './functions.scss';
-@mixin apply-all($step) {
+@mixin xcommon-all($step) {
     @include mixin-layout(layout);
     @include mixin-flex(flex, $step);
     @include mixin-content(content);
     @include mixin-hide(hide);
     @include mixin-fill(fill);
     @include mixin-wrap(wrap);
+    @include mixin-shadow(shadow);
     @include respond-to($device-small) {
         @include mixin-layout(layout-sm);
         @include mixin-layout(layout-sm-md);
@@ -37,7 +38,11 @@
     }
 }
 
-@mixin apply-layout() {
+@mixin xcommon-shadow() {
+    @include minin-shadow(shadow);
+}
+
+@mixin xcommon-layout() {
     @include mixin-layout(layout);
     @include respond-to($device-small) {
         @include mixin-layout(layout-sm);
@@ -49,7 +54,7 @@
     }
 }
 
-@mixin apply-flex($step) {
+@mixin xcommon-flex($step) {
     @include mixin-flex(flex, $step);
     @include respond-to($device-small) {
         @include mixin-flex(flex-sm, $step);
@@ -61,7 +66,7 @@
     }
 }
 
-@mixin apply-content() {
+@mixin xcommon-content() {
     @include mixin-content(content);
     @include respond-to($device-small) {
         @include mixin-content(content-sm);
@@ -73,7 +78,7 @@
     }
 }
 
-@mixin apply-hide() {
+@mixin xcommon-hide() {
     @include mixin-hide(hide);
     @include respond-to($device-small) {
         @include mixin-hide(hide-sm);
@@ -85,7 +90,7 @@
     }
 }
 
-@mixin apply-fill() {
+@mixin xcommon-fill() {
     @include mixin-fill(fill);
     @include respond-to($device-small) {
         @include mixin-fill(fill-sm);
@@ -97,7 +102,7 @@
     }
 }
 
-@mixin apply-wrap() {
+@mixin xcommon-wrap() {
     @include mixin-wrap(wrap);
     @include respond-to($device-small) {
         @include mixin-wrap(wrap-sm);
