@@ -1,4 +1,4 @@
-import { ArrayUtil } from './extensions';
+import { ArrayUtil } from "./extensions";
 
 export enum ExecuteMessageType {
 	Error = 1,
@@ -9,16 +9,17 @@ export enum ExecuteMessageType {
 
 export class ExecuteMessageInternal {
 
+	public MessageException: string[] = [];
+	public StackTracers: string[] = [];
+
 	constructor(error?: Error) {
 		this.AddException(error);
 	}
 
-	public MessageException: string[] = [];
-	public StackTracers: string[] = [];
-
 	public AddException(e: Error): void {
-		if (e == null)
+		if (e == null) {
 			return;
+		}
 
 		this.MessageException.push(e.message);
 		this.StackTracers.push(e.stack);
@@ -51,7 +52,7 @@ export class Execute {
 	public AddMessage(messageType: ExecuteMessageType, message: string): void;
 	public AddMessage(erro: Error, message: string): void;
 	public AddMessage(info: ExecuteMessageType | Error | Execute, message?: string): void {
-		if (typeof info === 'number') {
+		if (typeof info === "number") {
 			this.Messages.push(new ExecuteMessage(info, message));
 		}
 

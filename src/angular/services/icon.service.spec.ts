@@ -1,6 +1,6 @@
-import { IconService } from './';
+import { IconService } from "./";
 
-describe('Angular Service: Icon', () => {
+describe("Angular Service: Icon", () => {
 
 	let service: IconService;
 
@@ -8,7 +8,7 @@ describe('Angular Service: Icon', () => {
 		service = new IconService();
 	});
 
-	it('Check service instance', () => {
+	it("Check service instance", () => {
 		expect(service).not.toBeNull();
 	});
 });

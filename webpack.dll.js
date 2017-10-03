@@ -18,7 +18,6 @@ module.exports = {
             '@angular/core',
             '@angular/forms',
             '@angular/http',
-            '@angular/material',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
             '@angular/platform-server',

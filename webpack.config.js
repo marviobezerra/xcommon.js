@@ -15,10 +15,6 @@ module.exports = {
         hints: false
     },
     entry: {
-        'polyfills': './demo/polyfills.ts',
-        'vendor': './demo/vendor.ts',
-        'main': './demo/main.ts',
-        'app-style': './demo/styles/app-style.scss',
         // Lib
         'angular': './src/angular/index.ts',
         'core': './src/core/index.ts',
@@ -59,12 +55,22 @@ module.exports = {
             {
                 exclude: /(node_modules|app)$/,
                 test: /(app-style.scss|layout.scss)$/,
-                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader'] })
+                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', {
+					loader: "postcss-loader",
+					options: {
+						plugins: []
+					}
+				}, 'sass-loader'] })
             },
             {
                 exclude: /(node_modules|layout.scss|app-style.scss)$/,
                 test: /\.scss$/,
-                use: ['to-string-loader', 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: ['to-string-loader', 'style-loader', 'css-loader', {
+					loader: "postcss-loader",
+					options: {
+						plugins: []
+					}
+				}, 'sass-loader']
             },
             {
                 test: /\.html$/,
@@ -91,17 +97,6 @@ module.exports = {
                     autoprefixer
                 ]
             }
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            inject: 'body',
-            template: 'demo/index.html',
-            excludeChunks: [
-                'angular',
-                'core',
-                'test',
-                'layout'
-            ]
         }),
         new AddAssetHtmlPlugin({
             filepath: path.resolve('./wwwroot/dist/AngularStuff.dll.js'),

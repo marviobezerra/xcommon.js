@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, ValidatorFn } from '@angular/forms';
-import { EntityAction } from '../../core/entity-action';
+import { Injectable } from "@angular/core";
+import { FormGroup, FormArray, FormBuilder, ValidatorFn } from "@angular/forms";
+import { EntityAction } from "../../core/entity-action";
 
 interface IPropertyValidador {
 	validator: ValidatorFn | ValidatorFn[];
@@ -29,7 +29,7 @@ export class AutoForm<TEntity> {
 	}
 
 	public AddItemArray<TProperty>(property: (x: TEntity) => TProperty, formGroup: FormGroup, entity: any): FormGroup {
-		let result: FormGroup = this.BuildInternal(entity);
+		const result: FormGroup = this.BuildInternal(entity);
 		(<FormArray>formGroup.controls[this.PropertyRegEx.exec(property.toString())[1]]).push(result);
 		return result;
 	}

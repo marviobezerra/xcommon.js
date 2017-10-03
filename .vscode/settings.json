@@ -1,6 +1,4 @@
 {
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "editor.insertSpaces": false,
     "files.exclude": {
         ".npmignore": true,
         ".gitignore": true,
@@ -10,5 +8,10 @@
         "wwwroot": true,
         "node_modules": true,
         "LICENSE": true
-    }
+    },
+    "autoimport.doubleQuotes": true,
+    "editor.autoIndent": true,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }

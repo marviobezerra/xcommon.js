@@ -2,13 +2,13 @@ import { Execute, ExecuteMessageType } from "./";
 
 describe("Core: Execute", () => {
 	it("Default state", () => {
-		let execute = new Execute();
+		const execute = new Execute();
 
 		expect(execute.HasErro).toEqual(false);
 	});
 
 	it("Add error message", () => {
-		let execute = new Execute();
+		const execute = new Execute();
 		execute.AddMessage(ExecuteMessageType.Error, "Error message");
 
 		expect(execute.HasErro).toEqual(true);
@@ -17,7 +17,7 @@ describe("Core: Execute", () => {
 	});
 
 	it("Add warning message", () => {
-		let execute = new Execute();
+		const execute = new Execute();
 		execute.AddMessage(ExecuteMessageType.Warning, "Warning message");
 
 		expect(execute.HasErro).toEqual(false);
@@ -26,7 +26,7 @@ describe("Core: Execute", () => {
 	});
 
 	it("Add exception message", () => {
-		let execute = new Execute();
+		const execute = new Execute();
 		
 		execute.AddMessage(new Error("Error message"), "Error message");
 

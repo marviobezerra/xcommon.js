@@ -1,10 +1,11 @@
-import { Execute, ExecuteMessageType } from './execute';
+import { Execute, ExecuteMessageType } from "./execute";
 
 export class SpecificationValidation<T> {
-	constructor() {
-	}
 
 	private Expressions: ISpecificationExpression<T>[] = [];
+
+	constructor() { }
+
 
 	public And(expression: { (arg: T): boolean }, message: string, stopIfInvalid: boolean = false): SpecificationValidation<T> {
 		this.Expressions.push({ Expression: expression, Message: message, StopIfInvalid: stopIfInvalid });
@@ -22,11 +23,11 @@ export class SpecificationValidation<T> {
 		execute = execute || new Execute();
 
 		if (!entity) {
-			execute.AddMessage(ExecuteMessageType.Error, 'Entity can\'t be null');
+			execute.AddMessage(ExecuteMessageType.Error, "Entity can\"t be null");
 			return execute.HasErro;
 		}
 
-		for (let expression of this.Expressions) {
+		for (const expression of this.Expressions) {
 
 			if (!expression.Expression(entity)) {
 				execute.AddMessage(ExecuteMessageType.Error, expression.Message);
