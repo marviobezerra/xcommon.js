@@ -1,10 +1,9 @@
 .vscode
-demo
-scr
-test
-wwwroot
-tsconfig.json
+config
 node_modules
-typings
-typings.json
-*.map
+src
+.gitignore
+package-lock.json
+tsconfig.json
+tslint.json
+webpack.config.ts

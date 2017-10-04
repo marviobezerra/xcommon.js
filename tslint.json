@@ -13,8 +13,8 @@
         "comment-format": [
             false
         ],
-        "indent": [true, "tabs"],
         "arrow-parens": [false, "as-needed"],
+        "indent": [true, "tabs"],
         "object-literal-sort-keys": false,
         "only-arrow-functions": false,
         "use-life-cycle-interface": true, 
