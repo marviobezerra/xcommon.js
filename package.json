@@ -25,15 +25,21 @@
     }
   ],
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && webpack --env umd && del src\\*.d.ts /s"
-  },  
+	"clean:pre": "rimraf dist && rimraf dist-aot",
+	"clean:pos": "del src\\*.d.ts /s",
+	"build:copy": "xcopy dist-aot\\*.d.ts dist /E",
+	"build:ng": "node_modules/.bin/ngc -p tsconfig-aot.json",
+	"build:umd": "webpack --env umd",
+    "build": "npm run clean:pre && npm run build:ng && npm run build:umd && npm run build:copy && npm run clean:pos"
+  },
   "peerDependencies": {
     "@angular/forms": "^4.4.0",
     "@angular/http": "^4.4.0"
   },
   "devDependencies": {
     "@angular/common": "^4.4.4",
+    "@angular/compiler": "^4.4.4",
+    "@angular/compiler-cli": "^4.4.4",
     "@angular/core": "^4.4.4",
     "@angular/forms": "^4.4.4",
     "@angular/http": "^4.4.4",

@@ -7,3 +7,6 @@ package-lock.json
 tsconfig.json
 tslint.json
 webpack.config.ts
+compiled
+*.ngFactory.ts
+*.ts
