@@ -1,7 +1,7 @@
 /**
- * xcommon - Tools for TypeScript
- * @version v0.0.5
- * @author undefined
+ * xcommon.js - XCommon tools for TypeScript
+ * @version v0.0.1
+ * @author Márvio André Bezerra Silverio
  * @link https://github.com/marviobezerra/xcommon.js#readme
  * @license ISC
  */
@@ -105,7 +105,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var forms_1 = __webpack_require__(2);
 var auto_form_1 = __webpack_require__(6);
-var AutoFormService = /** @class */ (function () {
+var AutoFormService = (function () {
     function AutoFormService(formBuilder) {
         this.formBuilder = formBuilder;
     }
@@ -187,7 +187,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(0);
 var http_1 = __webpack_require__(7);
-var HttpUtilService = /** @class */ (function () {
+var HttpUtilService = (function () {
     function HttpUtilService(http) {
         this.http = http;
         this.ApiBaseAddress = "/api/";
@@ -260,7 +260,7 @@ exports.XCommonJsModule = xcommon_js_module_1.XCommonJsModule;
 Object.defineProperty(exports, "__esModule", { value: true });
 var forms_1 = __webpack_require__(2);
 var entity_1 = __webpack_require__(3);
-var AutoForm = /** @class */ (function () {
+var AutoForm = (function () {
     function AutoForm(formBuilder) {
         this.formBuilder = formBuilder;
         this.ActionKey = "Action";
@@ -280,7 +280,6 @@ var AutoForm = /** @class */ (function () {
         }
         return this;
     };
-    // tslint:disable-next-line:max-line-length
     AutoForm.prototype.AddAsyncValidator = function (property, validator) {
         var propertyName = this.PropertyRegEx.exec(property.toString())[1];
         var existsValidator = this.Validators.find(function (c) { return c.property === propertyName; });
@@ -411,16 +410,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Guid = /** @class */ (function () {
+var Guid = (function () {
     function Guid() {
     }
     Guid.NewGuid = function () {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-            // tslint:disable:one-variable-per-declaration
-            // tslint:disable:no-bitwise
             var r = Math.random() * 16 | 0, v = c === "x" ? r : (r & 0x3 | 0x8);
-            // tslint:enable:one-variable-per-declaration
-            // tslint:enable:no-bitwise
             return v.toString(16);
         });
     };
@@ -448,13 +443,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var auto_form_service_1 = __webpack_require__(1);
 var http_util_service_1 = __webpack_require__(4);
 var core_1 = __webpack_require__(0);
-var XCommonJsModule = /** @class */ (function () {
+var XCommonJsModule = (function () {
     function XCommonJsModule() {
     }
     XCommonJsModule = __decorate([
         core_1.NgModule({
             imports: [],
-            declarations: [
+            providers: [
                 auto_form_service_1.AutoFormService,
                 http_util_service_1.HttpUtilService
             ]
@@ -468,4 +463,4 @@ exports.XCommonJsModule = XCommonJsModule;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=index.umd.js.map
+//# sourceMappingURL=index.js.map

@@ -1,11 +1,11 @@
 {
-  "name": "xcommon",
+  "name": "xcommon.js",
   "author": "Márvio André Bezerra Silverio",
   "license": "ISC",
-  "version": "0.0.6",
-  "description": "Tools for TypeScript",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "version": "0.0.1",
+  "description": "XCommon tools for TypeScript",
+  "main": "./dist/index.min.js",
+  "typings": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marviobezerra/xcommon.js.git"
@@ -15,21 +15,19 @@
   },
   "homepage": "https://github.com/marviobezerra/xcommon.js#readme",
   "keywords": [
-    "xcommon",
-    "layout"
+    "xcommon.js"
   ],
   "contributors": [
     {
       "name": "Márvio André Bezerra Silverio",
       "email": "marvio.bezerra@gmail.com",
-      "url": "http://www.marvio.com.br"
+      "url": "http://www.xcommon.io"
     }
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --env umd",
-    "build:deploy": "npm run clean && webpack --env umd -p"
-  },
+    "build": "npm run clean && webpack --env umd && del src\\*.d.ts /s"
+  },  
   "peerDependencies": {
     "@angular/forms": "^4.4.0",
     "@angular/http": "^4.4.0"

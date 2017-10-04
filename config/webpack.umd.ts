@@ -7,8 +7,8 @@ const pkg = JSON.parse(fs.readFileSync(PathHelper.GetPath("package.json")).toStr
 
 export default {
 	entry: {
-		"index.umd": PathHelper.GetPath("src", "index.ts"),
-		"index.umd.min": PathHelper.GetPath("src", "index.ts"),
+		"index": PathHelper.GetPath("src", "index.ts"),
+		"index.min": PathHelper.GetPath("src", "index.ts")
 	},
 	output: {
 		path: PathHelper.GetPath("dist"),
@@ -82,7 +82,7 @@ export default {
 /**
  * ${pkg.name} - ${pkg.description}
  * @version v${pkg.version}
- * @author ${pkg.author.name}
+ * @author ${pkg.author}
  * @link ${pkg.homepage}
  * @license ${pkg.license}
  */

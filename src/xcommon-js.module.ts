@@ -5,7 +5,7 @@ import { NgModule } from "@angular/core";
 @NgModule({
 	imports: [
 	],
-	declarations: [
+	providers: [
 		AutoFormService,
 		HttpUtilService
 	]
