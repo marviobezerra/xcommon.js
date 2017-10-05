@@ -1,17 +1,18 @@
 import * as webpack from "webpack";
 import * as path from "path";
 import * as fs from "fs";
-import PathHelper from "./webpack.helper";
+import * as angularExternals from "webpack-angular-externals";
+import * as rxjsExternals from "webpack-rxjs-externals";
 
-const pkg = JSON.parse(fs.readFileSync(PathHelper.GetPath("package.json")).toString());
+const pkg = JSON.parse(fs.readFileSync("./package.json").toString());
 
 export default {
 	entry: {
-		"index": PathHelper.GetPath("dist-aot", "index.js"),
-		"index.min": PathHelper.GetPath("dist-aot", "index.js")
+		"index.umd": "./src/index.ts",
+		"index.umd.min": "./src/index.ts",
 	},
 	output: {
-		path: PathHelper.GetPath("dist"),
+		path: path.join(__dirname, "dist"),
 		filename: "[name].js",
 		libraryTarget: "umd",
 		library: "xcommon.js"
@@ -20,8 +21,8 @@ export default {
 		extensions: [".ts", ".js", ".json"]
 	},
 	externals: [
-		require("webpack-rxjs-externals")(),
-		require("webpack-angular-externals")()
+		angularExternals(),
+		rxjsExternals()
 	],
 	devtool: "source-map",
 	module: {

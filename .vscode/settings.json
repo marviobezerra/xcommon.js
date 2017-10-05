@@ -1,16 +1,20 @@
 {
     "files.exclude": {
         ".editorconfig": true,
-        "config": false,
         "wwwroot": true,
-        "tsconfig.json": false,
+        "tsconfig*.json": true,
         "webpack.config.ts": false,
-        "**/.git*": true,
+        "**/.git*": false,
+        ".npmignore": false,
         "**/.svn": true,
         "**/.hg": true,
-        "node_modules": false,
-        "tslint.json": false,
-        "package-lock.json": true
+        "node_modules": true,
+        "tslint.json": true,
+		"package-lock.json": true,
+		"dist": true,
+		"tmp": true,
+		"gulpfile.js": true,
+		"webpack.umd.ts": true
     },
     "autoimport.doubleQuotes": true,
     "editor.autoIndent": true,

@@ -1,0 +1,134 @@
+﻿@import './layout-core.scss';
+@import './functions.scss';
+@mixin xcommon-all($step) {
+	@include mixin-layout(layout);
+	@include mixin-flex(flex, $step);
+	@include mixin-content(content);
+	@include mixin-hide(hide);
+	@include mixin-show(show);
+	@include mixin-fill(fill);
+	@include mixin-wrap(wrap);
+	@include mixin-shadow(shadow);
+
+	@include respond-to($device-small) {
+		@include mixin-layout(layout-sm);
+		@include mixin-layout(layout-sm-md);
+
+		@include mixin-flex(flex-sm, $step);
+		@include mixin-flex(flex-sm-md, $step);
+
+		@include mixin-content(content-sm);
+		@include mixin-content(content-sm-md);
+
+		@include mixin-show(show-sm);
+		@include mixin-show(show-sm-md);
+
+		@include mixin-hide(hide-sm);
+		@include mixin-hide(hide-sm-md);
+
+		@include mixin-fill(fill-sm);
+		@include mixin-fill(fill-sm-md);
+
+		@include mixin-wrap(wrap-sm);
+		@include mixin-wrap(wrap-sm-md);
+	}
+
+	@include respond-to($device-medium) {
+		@include mixin-layout(layout-md);
+		@include mixin-layout(layout-md-sm);
+
+		@include mixin-flex(flex-md, $step);
+		@include mixin-flex(flex-sm-md, $step);
+
+		@include mixin-content(content-md);
+		@include mixin-content(content-sm-md);
+		
+		@include mixin-show(show-md);
+		@include mixin-show(show-sm-md);
+
+		@include mixin-hide(hide-md);
+		@include mixin-hide(hide-sm-md);
+
+		@include mixin-fill(fill-md);
+		@include mixin-fill(fill-sm-md);
+
+		@include mixin-wrap(wrap-sm);
+		@include mixin-wrap(wrap-sm-md);
+	}
+}
+
+@mixin xcommon-shadow() {
+    @include mixin-shadow(shadow);
+}
+
+@mixin xcommon-layout() {
+    @include mixin-layout(layout);
+    @include respond-to($device-small) {
+        @include mixin-layout(layout-sm);
+        @include mixin-layout(layout-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-layout(layout-md);
+        @include mixin-layout(layout-sm-md);
+    }
+}
+
+@mixin xcommon-flex($step) {
+    @include mixin-flex(flex, $step);
+    @include respond-to($device-small) {
+        @include mixin-flex(flex-sm, $step);
+        @include mixin-flex(flex-sm-md, $step);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-flex(flex-md, $step);
+        @include mixin-flex(flex-sm-md, $step);
+    }
+}
+
+@mixin xcommon-content() {
+    @include mixin-content(content);
+    @include respond-to($device-small) {
+        @include mixin-content(content-sm);
+        @include mixin-content(content-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-content(content-md);
+        @include mixin-content(content-sm-md);
+    }
+}
+
+@mixin xcommon-hide() {
+    @include mixin-hide(hide);
+    @include respond-to($device-small) {
+        @include mixin-hide(hide-sm);
+        @include mixin-hide(hide-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-hide(hide-md);
+        @include mixin-hide(hide-sm-md);
+    }
+}
+
+@mixin xcommon-fill() {
+    @include mixin-fill(fill);
+    @include respond-to($device-small) {
+        @include mixin-fill(fill-sm);
+        @include mixin-fill(fill-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-fill(fill-md);
+        @include mixin-fill(fill-sm-md);
+    }
+}
+
+@mixin xcommon-wrap() {
+    @include mixin-wrap(wrap);
+    @include respond-to($device-small) {
+        @include mixin-wrap(wrap-sm);
+        @include mixin-wrap(wrap-sm-md);
+    }
+    @include respond-to($device-medium) {
+        @include mixin-wrap(wrap-md);
+        @include mixin-wrap(wrap-sm-md);
+    }
+}

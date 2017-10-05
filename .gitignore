@@ -223,17 +223,7 @@ deploy/
 .DS_Store
 Thumbs.db
 
-wwwroot/
-aot/
-typings/
-**/app/**/*.json
-**/app/**/*.js
-**/app/**/*.map
-appsettings.Development.json
-
-/compiled
-*.metadata.json
-# These lines were probably already there
+dist
+tmp
 *.map.js
-# or 
-/src/**/*.js
+src/**/*.js

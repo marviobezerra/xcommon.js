@@ -1,18 +1,14 @@
 {
-	"compileOnSave": false,
-	"buildOnSave": false,
 	"compilerOptions": {
 		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"outDir": "./dist",
+		"noEmit": true,
 		"sourceMap": true,
-		"declaration": true,
-		"emitDecoratorMetadata": true,
+		"declaration": false,
+		"noImplicitAny": false,
 		"experimentalDecorators": true,
-		"removeComments": true,
-		"noImplicitAny": true,
-		"skipLibCheck": true,
+		"emitDecoratorMetadata": true,
 		"lib": [
 			"dom",
 			"es7",
@@ -20,12 +16,12 @@
 		]
 	},
 	"include": [
-		"./src"
-	],
-	"awesomeTypescriptLoaderOptions": {
-		"useWebpackText": true
-	},
-	"angularCompilerOptions": {
-		"genDir": "dist-aot"
-	}
+		"src/**/*.ts"
+	  ],
+	  "exclude": [
+		"src/**/*.spec.ts",
+		"node_modules",
+		"demo",
+		"dist"
+	  ]
 }

@@ -10,4 +10,4 @@ import { NgModule } from "@angular/core";
 		HttpUtilService
 	]
 })
-export class XCommonJsModule { }
+export class XCommonModule { }

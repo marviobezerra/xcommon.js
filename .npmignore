@@ -1,12 +1,2 @@
-.vscode
-config
-node_modules
-src
-.gitignore
-package-lock.json
-tsconfig.json
-tslint.json
-webpack.config.ts
-compiled
-*.ngFactory.ts
-*.ts
+*
+!dist/**
