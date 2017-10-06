@@ -4,8 +4,8 @@
         "wwwroot": true,
         "tsconfig*.json": true,
         "webpack.config.ts": false,
-        "**/.git*": false,
-        ".npmignore": false,
+        "**/.git*": true,
+        ".npmignore": true,
         "**/.svn": true,
         "**/.hg": true,
         "node_modules": true,
@@ -14,6 +14,7 @@
 		"dist": true,
 		"tmp": true,
 		"gulpfile.js": true,
+		"styles": true,
 		"webpack.umd.ts": true
     },
     "autoimport.doubleQuotes": true,
