@@ -1,8 +1,8 @@
 ﻿@import './layout-core.scss';
 @import './functions.scss';
-@mixin xcommon-all($step) {
+@mixin xcommon-layout-full() {
 	@include mixin-layout(layout);
-	@include mixin-flex(flex, $step);
+	@include mixin-flex(flex);
 	@include mixin-content(content);
 	@include mixin-hide(hide);
 	@include mixin-show(show);
@@ -14,8 +14,8 @@
 		@include mixin-layout(layout-sm);
 		@include mixin-layout(layout-sm-md);
 
-		@include mixin-flex(flex-sm, $step);
-		@include mixin-flex(flex-sm-md, $step);
+		@include mixin-flex(flex-sm);
+		@include mixin-flex(flex-sm-md);
 
 		@include mixin-content(content-sm);
 		@include mixin-content(content-sm-md);
@@ -37,8 +37,8 @@
 		@include mixin-layout(layout-md);
 		@include mixin-layout(layout-md-sm);
 
-		@include mixin-flex(flex-md, $step);
-		@include mixin-flex(flex-sm-md, $step);
+		@include mixin-flex(flex-md);
+		@include mixin-flex(flex-sm-md);
 
 		@include mixin-content(content-md);
 		@include mixin-content(content-sm-md);
@@ -73,15 +73,15 @@
     }
 }
 
-@mixin xcommon-flex($step) {
-    @include mixin-flex(flex, $step);
+@mixin xcommon-flex() {
+    @include mixin-flex(flex);
     @include respond-to($device-small) {
-        @include mixin-flex(flex-sm, $step);
-        @include mixin-flex(flex-sm-md, $step);
+        @include mixin-flex(flex-sm);
+        @include mixin-flex(flex-sm-md);
     }
     @include respond-to($device-medium) {
-        @include mixin-flex(flex-md, $step);
-        @include mixin-flex(flex-sm-md, $step);
+        @include mixin-flex(flex-md);
+        @include mixin-flex(flex-sm-md);
     }
 }
 

@@ -23,24 +23,13 @@
     }
 }
 
-@mixin mixin-flex($name, $step) {
+@mixin mixin-flex($name) {
 	[#{$name}] {
-		flex: 100 0 auto;
-	}
-
-	$i: $step;
-
-	@while $i < 100 {
-		[#{$name}="#{$i}"] {
-			flex: $i 0 auto;
-		}
-
-		$i: $i+$step;
+		flex: 1 0 auto;
 	}
 }
 
 @mixin mixin-layout($name) {
-    [#{$name}],
     [#{$name}="row"] {
         display: flex;
         flex-direction: row;
@@ -64,7 +53,6 @@
 }
 
 @mixin mixin-wrap($name) {
-    [#{$name}],
     [#{$name}="wrap"] {
         flex-wrap: wrap;
     }

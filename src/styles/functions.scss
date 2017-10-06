@@ -70,7 +70,7 @@ $justifyOptions: start, end, center, between, around;
 	@return 0 $primary-offset $blur $color;
 }
 
-@mixin parallax($image-url) {
+@mixin xcommon-parallax($image-url) {
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -98,14 +98,16 @@ $justifyOptions: start, end, center, between, around;
 	}
 }
 
-@mixin reset() {
+@mixin xcommon-fullbody() {
 	html, body, .viewport {
 		width: 100%;
 		height: 100%;
 		margin: 0;
 		padding: 0;
 	}
+}
 
+@mixin xcommon-reset() {
 	html,
 	body,
 	div,
