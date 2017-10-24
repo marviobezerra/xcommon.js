@@ -2,7 +2,7 @@
 	"name": "xcommon",
 	"author": "Márvio André Bezerra Silverio",
 	"license": "ISC",
-	"version": "0.0.15",
+	"version": "0.0.16",
 	"description": "XCommon tools for TypeScript",
 	"main": "./dist/index.umd.js",
 	"typings": "./dist/index.d.ts",

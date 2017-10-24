@@ -1,8 +1,11 @@
-import { KeysPipe } from "./pipes/keys.pipe";
+import { NgModule } from "@angular/core";
+
 import { AutoFormService } from "./services/auto-form.service";
 import { HttpUtilService } from "./services/http-util.service";
-import { NgModule } from "@angular/core";
 import { OrderByPipe } from "./pipes/orderby.pipe";
+import { KeysPipe } from "./pipes/keys.pipe";
+import { TextAreaAutosize } from "./directives/textarea-autogrow.directive";
+
 
 @NgModule({
 	imports: [
@@ -13,11 +16,13 @@ import { OrderByPipe } from "./pipes/orderby.pipe";
 	],
 	exports: [
 		KeysPipe,
-		OrderByPipe
+		OrderByPipe,
+		TextAreaAutosize
 	],
 	declarations: [
 		KeysPipe,
-		OrderByPipe
+		OrderByPipe,
+		TextAreaAutosize
 	]
 })
 export class XCommonModule { }
