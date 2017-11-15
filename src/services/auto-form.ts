@@ -112,7 +112,7 @@ export class AutoForm<TEntity> {
 
 	private BuildInternal(entity: TEntity | any): FormGroup {
 
-		const result: FormGroup = this.formBuilder.group({});
+		const result = this.formBuilder.group({});
 
 		for (const property in entity) {
 
@@ -120,14 +120,14 @@ export class AutoForm<TEntity> {
 				continue;
 			}
 
-			const object: any = entity[property];
+			const propertyValue: any = entity[property];
 
-			if (object instanceof Array) {
+			if (propertyValue instanceof Array) {
 
-				const arrayGroup: FormArray = this.formBuilder.array([]);
+				const arrayGroup = this.formBuilder.array([]);
 
-				for (const value of object) {
-					const item: FormGroup = this.BuildInternal(value);
+				for (const arrayItem of propertyValue) {
+					const item = this.BuildInternal(arrayItem);
 
 					this.OnEntityChange(item);
 					arrayGroup.push(item);
@@ -137,11 +137,11 @@ export class AutoForm<TEntity> {
 				continue;
 			}
 
-			if (object === Object(object) && !(object instanceof Date)) {
-				const item: FormGroup = this.formBuilder.group([property], this.BuildInternal(object));
-				this.OnEntityChange(item);
+			if (propertyValue === Object(propertyValue) && !(propertyValue instanceof Date)) {
+				const propertyGroup = this.BuildInternal(propertyValue);
+				this.OnEntityChange(propertyGroup);
 
-				result.addControl(property, item);
+				result.addControl(property, propertyGroup);
 				continue;
 			}
 
