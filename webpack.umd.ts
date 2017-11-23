@@ -9,7 +9,7 @@ const pkg = JSON.parse(fs.readFileSync("./package.json").toString());
 export default {
 	entry: {
 		"index.umd": "./src/index.ts",
-		"index.umd.min": "./src/index.ts",
+		"index.umd.min": "./src/index.ts"
 	},
 	output: {
 		path: path.join(__dirname, "dist"),

@@ -15,7 +15,7 @@
 		"tmp": true,
 		"gulpfile.js": true,
 		"styles": true,
-		"webpack.umd.ts": true
+		"webpack.umd.ts": false
     },
     "autoimport.doubleQuotes": true,
     "editor.autoIndent": true,

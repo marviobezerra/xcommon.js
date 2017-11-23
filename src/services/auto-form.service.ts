@@ -10,11 +10,11 @@ export class AutoFormService {
 	constructor(private formBuilder: FormBuilder) {
 	}
 
-	public createNew<TEntity>(): AutoForm<TEntity> {
+	public CreateNew<TEntity>(): AutoForm<TEntity> {
 		return new AutoForm<TEntity>(this.formBuilder);
 	}
 
-	public matchValidator(mainControlName: string): ValidatorFn {
+	public MatchValidator(mainControlName: string): ValidatorFn {
 
 		let mainControl: AbstractControl;
 
