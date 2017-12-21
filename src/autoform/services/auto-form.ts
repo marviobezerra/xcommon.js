@@ -1,5 +1,5 @@
 import { AsyncValidatorFn, Validators, ValidatorFn, FormBuilder, FormGroup, FormArray } from "@angular/forms";
-import { EntityAction } from "../entity/entity";
+import { EntityAction } from "../../entity/entity";
 
 interface IPropertyValidador {
 	asyncValidator: AsyncValidatorFn[];

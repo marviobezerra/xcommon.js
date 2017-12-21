@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ValidatorFn, AbstractControl, ValidationErrors, FormBuilder } from "@angular/forms";
-import { EntityAction } from "../entity/entity";
+import { EntityAction } from "../../entity/entity";
 
 import { AutoForm } from "./auto-form";
 
