@@ -3,13 +3,15 @@ import { Observable } from "rxjs/Observable";
 import { Observer } from "rxjs/Observer";
 import { IProvidersConfig, IProviderValue, ProviderType, IUser } from "./index";
 import { IProvider, LinkedInProvider, FacebookProvider, GoogleProvider } from "./providers/index";
+import { debug } from "util";
 
 type Providers = {[provider in ProviderType]?: IProvider };
 
 @Injectable()
-export class AuthService {
+export class SocialAuthService {
 
 	private Providers: Providers = {};
+	private Started = false;
 
 	constructor( @Inject("config") private config: IProvidersConfig) {
 		this.loadProviders(config);
@@ -43,6 +45,11 @@ export class AuthService {
 	}
 
 	private loadProviders(config: IProvidersConfig): void {
+
+		if (this.Started) {
+			return;
+		}
+
 		if (config.Google) {
 			this.Providers.Google = new GoogleProvider(config.Google);
 		}
@@ -54,5 +61,7 @@ export class AuthService {
 		if (config.LinkedIn) {
 			this.Providers.LinkedIn = new LinkedInProvider(config.LinkedIn);
 		}
+
+		this.Started = true;
 	}
 }

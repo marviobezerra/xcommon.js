@@ -1,19 +1,22 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
-import { AuthService } from "./services/auth.service";
+import { SocialAuthService } from "./services/social-auth.service";
 import { IProvidersConfig } from "./services/provider-config";
 
 declare let IN: any;
 declare let FB: any;
 
 @NgModule({
-	providers: [AuthService]
+	providers: [SocialAuthService]
 })
 export class XCommonAuthenticationModule {
 
 	public static forRoot(config: IProvidersConfig): ModuleWithProviders {
 		return {
 			ngModule: XCommonAuthenticationModule,
-			providers: [AuthService, { provide: "config", useValue: config }]
+			providers: [SocialAuthService, { provide: "config", useValue: config }]
 		};
+	}
+
+	constructor() {
 	}
 }
