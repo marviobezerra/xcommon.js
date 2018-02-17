@@ -21,18 +21,7 @@ export class AutoForm<TEntity> {
 	constructor(private formBuilder: FormBuilder) {
 	}
 
-	private GetPropertyName(property: string): string {
-		let value = property.replace(/(?:\/\*(?:[\s\S]*?)\*\/)|(?:([\s;])+\/\/(?:.*)$)/gm, "$1");
-		value = value.substring(value.indexOf("{") + 1, value.lastIndexOf("}"));
-		value = value.replace("return", "");
-		value = value.replace(";", "");
-		value = value.trim();
 
-		let result = value.split(".");
-		result.shift();
-
-		return result.join(".");
-	}
 
 	public Ignore<TProperty>(property: (x: TEntity) => TProperty): AutoForm<TEntity> {
 		this.IgnoreLits.push(this.GetPropertyName(property.toString()));
@@ -125,6 +114,12 @@ export class AutoForm<TEntity> {
 
 	public Build(entity: TEntity): FormGroup {
 		return this.BuildInternal(entity, true);
+	}
+
+	private GetPropertyName(property: string): string {
+		const body = property.split("=>").pop().trim().split(".");
+		body.shift();
+		return body.join(".");
 	}
 
 	private BuildInternal(entity: TEntity | any, addValidators: boolean): FormGroup {
