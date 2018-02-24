@@ -2,7 +2,7 @@
 	"name": "xcommon",
 	"author": "Márvio André Bezerra Silverio",
 	"license": "ISC",
-	"version": "0.0.25",
+	"version": "0.0.26",
 	"description": "XCommon tools for TypeScript",
 	"main": "./dist/index.umd.js",
 	"typings": "./dist/index.d.ts",
@@ -35,10 +35,10 @@
 		"build:ng": "node_modules/.bin/ngc -p tsconfig-aot.json"
 	},
 	"peerDependencies": {
-		"@angular/common": "5.2.6",
-		"@angular/core": "5.2.6",
-		"@angular/forms": "5.2.6",
-		"@angular/http": "5.2.6"
+		"@angular/common": "^5.2.6",
+		"@angular/core": "^5.2.6",
+		"@angular/forms": "^5.2.6",
+		"@angular/http": "^5.2.6"
 	},
 	"devDependencies": {
 		"@angular/common": "5.2.6",
