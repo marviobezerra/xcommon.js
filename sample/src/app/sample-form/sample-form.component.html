@@ -1,0 +1,70 @@
+<div>
+	<h1>
+		Simple form
+	</h1>
+	<form *ngIf="ready" [formGroup]="signInForm.formGroup">
+		<div>
+			<input formControlName="email" placeholder="Email" type="email" />
+		</div>
+		<div>
+			<input formControlName="password" placeholder="password" type="password" />
+		</div>
+		<button type="button" [disabled]="!signInForm.formGroup.valid">Valida</button>
+		<button type="button" (click)="enableFormValidator(true)">Disable Validation</button>
+		<button type="button" (click)="enableFormValidator(false)">Enable Validation</button>
+	</form>
+
+	<div>
+		<p>Valid: {{signInForm.formGroup.valid}}</p>
+		<p>{{signInForm.formGroup.value | json}}</p>
+	</div>
+
+	<h1>
+		Form with nested form group
+	</h1>
+	<form *ngIf="ready" [formGroup]="personForm.formGroup">
+		<div>
+			<input formControlName="name" />
+
+		</div>
+		<div>
+			<input formControlName="email" />
+		</div>
+		<div>
+			<input formControlName="age" />
+		</div>
+		<div formGroupName="user">
+			<input formControlName="email" />
+		</div>
+		<div formGroupName="user">
+			<input formControlName="password" />
+		</div>
+
+		<button type="button" [disabled]="!personForm.formGroup.valid">Valida</button>
+		<button type="button" (click)="enableEmail(false)">Enable Email</button>
+		<button type="button" (click)="enableEmail(true)">Disenable Email</button>
+	</form>
+
+	<div>
+		<p>Valid: {{personForm.formGroup.valid}}</p>
+		<p>{{personForm.formGroup.value | json}}</p>
+	</div>
+
+	<h1>
+		Level 3 form
+	</h1>
+	<form *ngIf="ready" [formGroup]="leveForm.formGroup">
+		<div>
+			<input formControlName="level01Value" placeholder="level01Value" />
+		</div>
+		<div formGroupName="level02">
+			<input formControlName="level02Value" placeholder="level02Value" />
+
+			<div formGroupName="level03">
+				<input formControlName="level03Value" placeholder="level03Value" />
+			</div>
+		</div>
+
+		<button type="button" [disabled]="!leveForm.formGroup.valid">Valida</button>
+	</form>
+</div>

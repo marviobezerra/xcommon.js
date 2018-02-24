@@ -17,7 +17,6 @@
 		"styles": true,
 		"webpack.umd.ts": false
     },
-    "autoimport.doubleQuotes": true,
     "editor.autoIndent": true,
     "editor.insertSpaces": false,
     "editor.detectIndentation": false,    

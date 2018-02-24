@@ -8,7 +8,7 @@
         },
         "quotemark": [
             true,
-            "double"
+            "single"
         ],
         "comment-format": [
             false

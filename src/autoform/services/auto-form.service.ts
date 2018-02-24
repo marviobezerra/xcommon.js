@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { ValidatorFn, AbstractControl, ValidationErrors, FormBuilder } from "@angular/forms";
-import { EntityAction } from "../../entity/entity";
+import { Injectable } from '@angular/core';
+import { ValidatorFn, AbstractControl, ValidationErrors, FormBuilder } from '@angular/forms';
+import { EntityAction } from '../../entity/entity';
 
-import { AutoForm } from "./auto-form";
+import { AutoForm } from './auto-form';
 
 @Injectable()
 export class AutoFormService {
@@ -25,7 +25,7 @@ export class AutoFormService {
 				mainControl = control.parent.get(mainControlName) as AbstractControl;
 
 				if (!mainControl) {
-					throw new Error("matchValidator(): main control is not found in parent group");
+					throw new Error('matchValidator(): main control is not found in parent group');
 				}
 
 				mainControl.valueChanges.subscribe(() => {

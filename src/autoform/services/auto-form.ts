@@ -1,6 +1,4 @@
-import { AsyncValidatorFn, Validators, ValidatorFn, FormBuilder, FormGroup, FormArray } from "@angular/forms";
-import { EntityAction } from "../../entity/entity";
-import { AbstractControl } from "@angular/forms/src/model";
+import { AsyncValidatorFn, Validators, ValidatorFn, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 
 interface IPropertyValidador {
 	asyncValidator: AsyncValidatorFn[];
@@ -9,139 +7,184 @@ interface IPropertyValidador {
 	group?: string;
 	async: boolean;
 	isGroup: boolean;
+	disable: boolean;
 }
 
 export class AutoForm<TEntity> {
-	private ActionKey = "Action";
-	private DisabledLits: string[] = [];
-	private IgnoreLits: string[] = [];
-	private Validators: IPropertyValidador[] = [];
-	//private PropertyRegEx = /\.([^\.;]+);?\s*\}$/;
+
+	public formGroup: FormGroup;
+
+	private disabledLits: string[] = [];
+	private ignoreLits: string[] = [];
+	private validators: IPropertyValidador[] = [];
 
 	constructor(private formBuilder: FormBuilder) {
 	}
 
+	public addValidator<TProperty>(property: (x: TEntity) => TProperty, validator?: ValidatorFn): AutoForm<TEntity> {
+		validator = validator || Validators.required;
 
-
-	public Ignore<TProperty>(property: (x: TEntity) => TProperty): AutoForm<TEntity> {
-		this.IgnoreLits.push(this.GetPropertyName(property.toString()));
-		return this;
-	}
-
-	public Disable<TProperty>(property: (x: TEntity) => TProperty, disable: boolean = true): AutoForm<TEntity> {
-
-		if (disable) {
-			this.DisabledLits.push(this.GetPropertyName(property.toString()));
-		}
-
-		return this;
-	}
-
-	// tslint:disable-next-line:max-line-length
-	public AddAsyncValidator<TProperty>(property: (x: TEntity) => TProperty, validator: AsyncValidatorFn): AutoForm<TEntity> {
-
-		const propertyName = this.GetPropertyName(property.toString());
-		const existsValidator = this.Validators.find(c => c.property === propertyName);
-
-		if (existsValidator) {
-			existsValidator.asyncValidator.push(validator);
-			return this;
-		}
-
-		this.Validators.push({
-			property: propertyName,
-			async: true,
-			isGroup: false,
-			asyncValidator: [validator],
-			validator: null
-		});
-
-		return this;
-	}
-
-	public AddValidator<TProperty>(property: (x: TEntity) => TProperty, validator: ValidatorFn): AutoForm<TEntity> {
-
-		const propertyName = this.GetPropertyName(property.toString());
-		const existsValidator = this.Validators.find(c => c.property === propertyName);
+		const propertyName = this.getPropertyName(property.toString());
+		const existsValidator = this.validators.find(c => c.property === propertyName);
 
 		if (existsValidator) {
 			existsValidator.validator.push(validator);
 			return this;
 		}
 
-		this.Validators.push({
+		this.validators.push({
 			property: propertyName,
 			async: false,
 			isGroup: false,
 			validator: [validator],
-			asyncValidator: null
+			asyncValidator: null,
+			disable: false
 		});
 
 		return this;
 	}
 
-	public AddItemArray<TProperty>(property: (x: TEntity) => TProperty, formGroup: FormGroup, entity: any): FormGroup {
-		const propertyName = this.GetPropertyName(property.toString());
-		const result: FormGroup = this.BuildInternal(entity, true);
-		const control = this.GetControl(formGroup, propertyName);
+	// tslint:disable-next-line:max-line-length
+	public addAsyncValidator<TProperty>(property: (x: TEntity) => TProperty, validator: AsyncValidatorFn): AutoForm<TEntity> {
 
-		(control as FormArray).push(result);
-		return result;
-	}
+		const propertyName = this.getPropertyName(property.toString());
+		const existsValidator = this.validators.find(c => c.property === propertyName);
 
-	public SetAction(form: FormGroup, action: EntityAction): void {
-		form.controls[this.ActionKey].setValue(action);
-	}
-
-	public SetUpdate(form: FormGroup): void {
-		if (form.controls[this.ActionKey].value === EntityAction.None) {
-			form.controls[this.ActionKey].setValue(EntityAction.Update);
+		if (existsValidator) {
+			existsValidator.asyncValidator.push(validator);
+			return this;
 		}
+
+		this.validators.push({
+			property: propertyName,
+			async: true,
+			isGroup: false,
+			asyncValidator: [validator],
+			validator: null,
+			disable: false
+		});
+
+		return this;
 	}
 
-	public SetDisable<TProperty>(property: (x: TEntity) => TProperty, formGroup: FormGroup, disable: boolean): void {
-		const propertyName = this.GetPropertyName(property.toString());
-		const control = formGroup.controls[propertyName] as FormArray;
+	public ignore<TProperty>(property: (x: TEntity) => TProperty): AutoForm<TEntity> {
+		this.ignoreLits.push(this.getPropertyName(property.toString()));
+		return this;
+	}
+
+	// tslint:disable-next-line:max-line-length
+	public disablePropertyValidator<TProperty>(property: (x: TEntity) => TProperty, disable: boolean = true): AutoForm<TEntity> {
+		const propertyName = this.getPropertyName(property.toString());
+		const control = this.getControl(this.formGroup, propertyName);
+
+		if (!disable) {
+
+			this.validators
+				.filter(c => c.property === propertyName)
+				.forEach(validator => {
+					validator.disable = false;
+					control.setValidators(Validators.compose(validator.validator));
+				});
+		}
 
 		if (disable) {
-			control.disable({ onlySelf: true, emitEvent: true });
-			return;
+			this.validators
+				.filter(c => c.property === propertyName)
+				.forEach(validator => {
+					validator.disable = true;
+				});
+
+			control.setValidators(null);
 		}
 
-		control.enable({ onlySelf: true, emitEvent: true });
-
+		control.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+		return this;
 	}
 
-	public Build(entity: TEntity): FormGroup {
-		return this.BuildInternal(entity, true);
+	public isControlDisabled<TProperty>(property: (x: TEntity) => TProperty): boolean {
+		const propertyName = this.getPropertyName(property.toString());
+		return !!this.disabledLits.find(c => c === propertyName);
 	}
 
-	private GetPropertyName(property: string): string {
-		const body = property.split("=>").pop().trim().split(".");
+	public disableControl<TProperty>(property: (x: TEntity) => TProperty, disable: boolean = true): AutoForm<TEntity> {
+
+		const propertyName = this.getPropertyName(property.toString());
+
+		if (disable && !this.disabledLits.find(c => c === propertyName)) {
+			this.disabledLits.push(propertyName);
+		}
+
+		if (!disable) {
+			this.disabledLits = this.disabledLits.filter(c => c !== propertyName);
+		}
+
+		if (this.formGroup) {
+			const control = this.getControl(this.formGroup, propertyName);
+
+			if (disable) {
+				control.disable({ onlySelf: true, emitEvent: true });
+				return;
+			}
+
+			control.enable({ onlySelf: true, emitEvent: true });
+		}
+
+		return this;
+	}
+
+	public setValue<TProperty>(property: (x: TEntity) => TProperty, value: any): AutoForm<TEntity> {
+		const propertyName = this.getPropertyName(property.toString());
+		const control = this.getControl(this.formGroup, propertyName);
+		control.setValue(value);
+
+		return this;
+	}
+
+	public build(entity: TEntity): FormGroup {
+		this.formGroup = this.buildInternal(entity, true);
+		return this.formGroup;
+	}
+
+	private getPropertyName(property: string): string {
+		const body = property.split('=>').pop().trim().split('.');
 		body.shift();
-		return body.join(".");
+		const result = body.join('.').split(';');
+		result.pop();
+		return result.join('.').trim();
 	}
 
-	private BuildInternal(entity: TEntity | any, addValidators: boolean): FormGroup {
+	private getControl(form: FormGroup, property: string): AbstractControl {
+		const list = property.split('.');
+		const item = list.shift();
+		const result = form.controls[item];
+
+		if (list.length === 0) {
+			return result;
+		}
+
+		return this.getControl(result as FormGroup, list.join('.'));
+	}
+
+	private buildInternal(entity: TEntity | any, addValidators: boolean): FormGroup {
 
 		const result = this.formBuilder.group({});
 
 		for (const property in entity) {
 
-			if (this.IgnoreLits.find(c => c === property)) {
+			// Check Ignore List
+			if (this.ignoreLits.find(c => c === property)) {
 				continue;
 			}
 
 			const propertyValue: any = entity[property];
 
+			// Array Property
 			if (propertyValue instanceof Array) {
 
 				const arrayGroup = this.formBuilder.array([]);
 
 				for (const arrayItem of propertyValue) {
-					const item = this.BuildInternal(arrayItem, false);
-
-					this.OnEntityChange(item);
+					const item = this.buildInternal(arrayItem, false);
 					arrayGroup.push(item);
 				}
 
@@ -149,24 +192,26 @@ export class AutoForm<TEntity> {
 				continue;
 			}
 
+			// Object Property
 			if (propertyValue === Object(propertyValue) && !(propertyValue instanceof Date)) {
-				const propertyGroup = this.BuildInternal(propertyValue, false);
-				this.OnEntityChange(propertyGroup);
+				const propertyGroup = this.buildInternal(propertyValue, false);
 
 				result.addControl(property, propertyGroup);
 				continue;
 			}
 
+			// Simple Property
 			result.addControl(property, this.formBuilder.control(entity[property]));
 		}
 
+		// Check if it needs to add validators
 		if (!addValidators) {
-			this.OnEntityChange(result);
 			return result;
 		}
 
-		for (const validator of this.Validators) {
-			const control = this.GetControl(result, validator.property);
+		// Add Validators
+		for (const validator of this.validators) {
+			const control = this.getControl(result, validator.property);
 
 			if (validator.async) {
 				control.setAsyncValidators(Validators.composeAsync(validator.asyncValidator));
@@ -175,34 +220,12 @@ export class AutoForm<TEntity> {
 			}
 		}
 
-		for (const property of this.DisabledLits) {
-			const control = this.GetControl(result, property);
+		// Disable Controls
+		for (const property of this.disabledLits) {
+			const control = this.getControl(result, property);
 			control.disable({ onlySelf: true, emitEvent: true });
 		}
 
-		this.OnEntityChange(result);
 		return result;
-	}
-
-	private GetControl(form: FormGroup, property: string): AbstractControl {
-		const list = property.split(".");
-		const item = list.shift();
-		const result = form.controls[item];
-
-		if (list.length === 0) {
-			return result;
-		}
-
-		return this.GetControl(result as FormGroup, list.join("."));
-	}
-
-	private OnEntityChange<TModel extends { Action: EntityAction }>(formGroup: FormGroup): void {
-		formGroup
-			.valueChanges
-			.subscribe((value: TModel) => {
-				if (value.Action === EntityAction.None) {
-					value.Action = EntityAction.Update;
-				}
-			});
 	}
 }
