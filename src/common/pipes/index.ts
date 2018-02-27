@@ -1,2 +1,2 @@
-export * from "./keys.pipe";
-export * from "./orderby.pipe";
+export * from './keys.pipe';
+export * from './orderby.pipe';

@@ -1,7 +1,7 @@
-import { Input, AfterViewInit, ElementRef, HostListener, Directive } from "@angular/core";
+import { Input, AfterViewInit, ElementRef, HostListener, Directive } from '@angular/core';
 
 @Directive({
-	selector: "textarea[autosize]"
+	selector: 'textarea[autosize]'
 })
 
 export class TextAreaAutosize implements AfterViewInit {
@@ -17,7 +17,7 @@ export class TextAreaAutosize implements AfterViewInit {
 		this.clientWidthValue = this.el.clientWidth;
 	}
 
-	@Input("minHeight")
+	@Input('minHeight')
 	public get minHeight(): string {
 		return this.minHeightValue;
 	}
@@ -26,7 +26,7 @@ export class TextAreaAutosize implements AfterViewInit {
 		this.updateMinHeight();
 	}
 
-	@Input("maxHeight")
+	@Input('maxHeight')
 	public get maxHeight(): string {
 		return this.maxHeightValue;
 	}
@@ -35,7 +35,7 @@ export class TextAreaAutosize implements AfterViewInit {
 		this.updateMaxHeight();
 	}
 
-	@HostListener("window:resize", ["$event.target"])
+	@HostListener('window:resize', ['$event.target'])
 	public onResize(textArea: HTMLTextAreaElement): void {
 		if (this.el.clientWidth === this.clientWidthValue) {
 			return;
@@ -45,7 +45,7 @@ export class TextAreaAutosize implements AfterViewInit {
 		this.adjust();
 	}
 
-	@HostListener("input", ["$event.target"])
+	@HostListener('input', ['$event.target'])
 	public onInput(textArea: HTMLTextAreaElement): void {
 		this.adjust();
 	}
@@ -53,12 +53,12 @@ export class TextAreaAutosize implements AfterViewInit {
 	public ngAfterViewInit(): void {
 		const style = window.getComputedStyle(this.el, null);
 
-		if (style.resize === "both") {
-			this.el.style.resize = "horizontal";
+		if (style.resize === 'both') {
+			this.el.style.resize = 'horizontal';
 		}
 
-		if (style.resize === "vertical") {
-			this.el.style.resize = "none";
+		if (style.resize === 'vertical') {
+			this.el.style.resize = 'none';
 		}
 
 		this.adjust();
@@ -66,17 +66,17 @@ export class TextAreaAutosize implements AfterViewInit {
 
 	private adjust(): void {
 
-		this.el.style.overflow = "hidden";
-		this.el.style.height = "auto";
-		this.el.style.height = this.el.scrollHeight + "px";
+		this.el.style.overflow = 'hidden';
+		this.el.style.height = 'auto';
+		this.el.style.height = this.el.scrollHeight + 'px';
 	}
 
 	private updateMinHeight(): void {
-		this.el.style.minHeight = this.minHeightValue + "px";
+		this.el.style.minHeight = this.minHeightValue + 'px';
 	}
 
 	private updateMaxHeight(): void {
-		this.el.style.maxHeight = this.maxHeightValue + "px";
+		this.el.style.maxHeight = this.maxHeightValue + 'px';
 	}
 
 }

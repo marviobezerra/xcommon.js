@@ -1,4 +1,4 @@
-import { ProviderType } from "./";
+import { ProviderType } from './';
 
 export interface IProviderValue {
 	clientId: string;

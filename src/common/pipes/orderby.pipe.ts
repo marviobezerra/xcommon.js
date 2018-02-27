@@ -1,7 +1,7 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-	name: "orderBy"
+	name: 'orderBy'
 })
 export class OrderByPipe implements PipeTransform {
 	public transform(array: any[], field: string): any {

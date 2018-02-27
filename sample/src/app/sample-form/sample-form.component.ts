@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup } from '@angular/forms';
+
 import { AutoFormService, AutoForm } from '../../../../src/autoform';
 import { SignInEntity, PersonEntity, Level01 } from '../entity';
-import { Validators, FormGroup } from '@angular/forms';
+import { Execute, ExecuteMessageType, ExecuteMessage } from '../../../../src/entity';
 
 @Component({
 	selector: 'app-sample-form',
@@ -83,6 +85,35 @@ export class SampleFormComponent implements OnInit {
 			});
 
 		this.ready = true;
+
+		this.testExecute();
 	}
 
+	private testExecute(): void {
+		const test01 = new Execute<any>();
+		test01
+			.addMessage(ExecuteMessageType.Error, 'Invalid name')
+			.addMessage(ExecuteMessageType.Error, 'Invalid email')
+			.addMessage(ExecuteMessageType.Warning, 'You may want to create a new thing?');
+
+		console.log(`01 HasError: ${test01.hasError}`);
+		console.log(`01 HasWarning: ${test01.hasWarning}`);
+		console.log(`01 Messages Count: ${test01.messages.length}`);
+		console.log(`01 Messages: ${test01.buildMessage('<br/>')}`);
+
+		const test02 = new Execute<any>();
+		test02.addMessage(test01);
+		console.log(`02 HasError: ${test02.hasError}`);
+		console.log(`02 HasWarning: ${test02.hasWarning}`);
+		console.log(`02 Messages Count: ${test02.messages.length}`);
+		console.log(`02 Messages: ${test02.buildMessage(' | ')}`);
+
+		const test03 = new Execute<any>(test02);
+		console.log(`03 HasError: ${test03.hasError}`);
+		console.log(`03 HasWarning: ${test03.hasWarning}`);
+		console.log(`03 Messages Count: ${test03.messages.length}`);
+		console.log(test03.buildMessage());
+		console.log(test03.getMessages());
+		console.log(test03.getMessages(ExecuteMessageType.Warning));
+	}
 }

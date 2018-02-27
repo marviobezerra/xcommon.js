@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
-import { URLSearchParams } from "@angular/http";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { URLSearchParams } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class HttpUtilService {
 
-	public ApiBaseAddress: string = "/api/";
+	public ApiBaseAddress: string = '/api/';
 
 	constructor(private http: HttpClient) {
 	}
 
 	public BuidlUrl(...url: string[]): string {
 		const result: string = [this.ApiBaseAddress, ...url]
-			.join("/")
-			.replace(new RegExp("//", "gm"), "/");
+			.join('/')
+			.replace(new RegExp('//', 'gm'), '/');
 
 		return result;
 	}

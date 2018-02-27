@@ -9,7 +9,7 @@
         "**/.svn": true,
         "**/.hg": true,
         "node_modules": true,
-        "tslint.json": true,
+        "tslint.json": false,
 		"package-lock.json": true,
 		"dist": true,
 		"tmp": true,

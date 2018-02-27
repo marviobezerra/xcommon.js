@@ -1,51 +1,58 @@
 {
-    "extends": "tslint:recommended",
-    "rules": {
-        "max-line-length": {
-            "options": [
-                120
-            ]
-        },
-        "quotemark": [
-            true,
-            "single"
-        ],
-        "comment-format": [
-            false
-        ],
-        "arrow-parens": [false, "as-needed"],
-        "indent": [true, "tabs"],
-        "object-literal-sort-keys": false,
-        "only-arrow-functions": false,
-        "use-life-cycle-interface": true, 
-        "ordered-imports": false,
-        "eofline": false,
-        "new-parens": true,
-        "no-empty": false,
-        "no-arg": true,      
-        "no-bitwise": true,
-        "no-conditional-assignment": true,
-        "no-consecutive-blank-lines": false,
-        "trailing-comma": [
-            true,
-            {
-                "multiline": {
-                    "objects": "never",
-                    "arrays": "never",
-                    "functions": "never",
-                    "typeLiterals": "never"
-                }
-            }
-        ],
-        "no-console": {
-            "options": [
-                "debug",
-                "info",
-                "log",
-                "time",
-                "timeEnd",
-                "trace"
-            ]
-        }
-    }
+	"extends": "tslint:recommended",
+	"rules": {
+		"max-line-length": {
+			"options": [
+				120
+			]
+		},
+		"quotemark": [
+			true,
+			"single"
+		],
+		"comment-format": [
+			false
+		],
+		"arrow-parens": [
+			false,
+			"as-needed"
+		],
+		"indent": [
+			true,
+			"tabs"
+		],
+		"object-literal-sort-keys": false,
+		"only-arrow-functions": false,
+		"use-life-cycle-interface": true,
+		"ordered-imports": false,
+		"eofline": false,
+		"new-parens": true,
+		"no-empty": false,
+		"no-arg": true,
+		"no-bitwise": true,
+		"unified-signatures": false,
+		"no-conditional-assignment": true,
+		"no-consecutive-blank-lines": false,
+		"trailing-comma": [
+			true,
+			{
+				"multiline": {
+					"objects": "never",
+					"arrays": "never",
+					"functions": "never",
+					"typeLiterals": "never"
+				}
+			}
+		],
+		"no-console": {
+			"options": [
+				"debug",
+				"info",
+				"log",
+				"time",
+				"timeEnd",
+				"trace"
+			]
+		}
+	}
 }

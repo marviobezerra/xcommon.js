@@ -1,9 +1,9 @@
-import { Injectable, Inject } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
-import { IProvidersConfig, IProviderValue, ProviderType, IUser } from "./index";
-import { IProvider, LinkedInProvider, FacebookProvider, GoogleProvider } from "./providers/index";
-import { debug } from "util";
+import { Injectable, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { IProvidersConfig, IProviderValue, ProviderType, IUser } from './index';
+import { IProvider, LinkedInProvider, FacebookProvider, GoogleProvider } from './providers/index';
+import { debug } from 'util';
 
 type Providers = {[provider in ProviderType]?: IProvider };
 
@@ -13,7 +13,7 @@ export class SocialAuthService {
 	private Providers: Providers = {};
 	private Started = false;
 
-	constructor( @Inject("config") private config: IProvidersConfig) {
+	constructor( @Inject('config') private config: IProvidersConfig) {
 		this.loadProviders(config);
 	}
 
@@ -22,7 +22,7 @@ export class SocialAuthService {
 		const providerDefinition = this.Providers[provider];
 
 		if (!providerDefinition) {
-			throw new Error("Invalid provider: " + provider);
+			throw new Error('Invalid provider: ' + provider);
 		}
 
 		return providerDefinition.LogIn();
@@ -30,17 +30,17 @@ export class SocialAuthService {
 
 	public logout(): Observable<boolean> {
 
-		const provider = localStorage.getItem("_login_provider");
+		const provider = localStorage.getItem('_login_provider');
 
 		switch (provider) {
-			case "google":
+			case 'google':
 				return this.Providers.Google.LogOut();
-			case "facebook":
+			case 'facebook':
 				return this.Providers.Facebook.LogOut();
-			case "linkedin":
+			case 'linkedin':
 				return this.Providers.LinkedIn.LogOut();
 			default:
-				throw new Error("Invalid provider: " + provider);
+				throw new Error('Invalid provider: ' + provider);
 		}
 	}
 
