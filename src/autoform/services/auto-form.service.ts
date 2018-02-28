@@ -9,7 +9,7 @@ export class AutoFormService {
 	constructor(private formBuilder: FormBuilder) {
 	}
 
-	public CreateNew<TEntity>(): AutoForm<TEntity> {
+	public createNew<TEntity>(): AutoForm<TEntity> {
 		return new AutoForm<TEntity>(this.formBuilder);
 	}
 

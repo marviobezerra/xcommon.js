@@ -5,20 +5,20 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable()
 export class HttpUtilService {
 
-	public ApiBaseAddress: string = '/api/';
+	public apiBaseAddress: string = '/api/';
 
 	constructor(private http: HttpClient) {
 	}
 
-	public BuidlUrl(...url: string[]): string {
-		const result: string = [this.ApiBaseAddress, ...url]
+	public buidlUrl(...url: string[]): string {
+		const result: string = [this.apiBaseAddress, ...url]
 			.join('/')
 			.replace(new RegExp('//', 'gm'), '/');
 
 		return result;
 	}
 
-	public BuildGetParams(entity: any): HttpParams {
+	public buildGetParams(entity: any): HttpParams {
 
 		let result = new HttpParams();
 

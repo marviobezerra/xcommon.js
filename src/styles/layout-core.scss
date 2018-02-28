@@ -64,19 +64,6 @@
     }
 }
 
-@mixin mixin-fill($name) {
-    [#{$name}] {
-        min-height: 100%;
-        min-width: 100%;
-    }
-    [#{$name}="vertical"] {
-        min-height: 100%;
-    }
-    [#{$name}="horizonal"] {
-        min-width: 100%;
-    }
-}
-
 @mixin mixin-shadow($name) {
     [#{$name}] {
         box-shadow: shadow-bottom(2), shadow-top(2);
