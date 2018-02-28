@@ -1,0 +1,18 @@
+@import '../../../src/styles/functions.scss';
+
+:host {
+  @include host-flex-direction(column);
+  @include host-flex();
+}
+
+.app {
+  .header {
+    min-height: 40px;
+    background-color: #01579B;
+  }
+
+  .content {
+	margin-top: 10px;
+	padding: 0 10px;
+  }
+}

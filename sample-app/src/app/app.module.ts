@@ -4,21 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { SampleStyleComponent } from './sample-style/sample-style.component';
 import { SampleFormComponent } from './sample-form/sample-form.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { XCommonAutoFormModule } from '../../../src/autoform';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		SampleStyleComponent,
 		SampleFormComponent
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
-		FormsModule,
 		ReactiveFormsModule,
+		AppRoutingModule,
 		XCommonAutoFormModule
 	],
 	providers: [],

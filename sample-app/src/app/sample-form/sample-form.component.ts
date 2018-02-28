@@ -8,7 +8,7 @@ import { Execute, ExecuteMessageType, ExecuteMessage } from '../../../../src/ent
 @Component({
 	selector: 'app-sample-form',
 	templateUrl: './sample-form.component.html',
-	styleUrls: ['./sample-form.component.css']
+	styleUrls: ['./sample-form.component.scss']
 })
 export class SampleFormComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class SampleFormComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.signInForm = this.autoForm.CreateNew<SignInEntity>();
+		this.signInForm = this.autoForm.createNew<SignInEntity>();
 
 		this.signInForm
 			.addValidator(c => c.email, Validators.required)
@@ -47,7 +47,7 @@ export class SampleFormComponent implements OnInit {
 				password: ''
 			});
 
-		this.personForm = this.autoForm.CreateNew<PersonEntity>();
+		this.personForm = this.autoForm.createNew<PersonEntity>();
 
 		this.personForm
 			.addValidator(c => c.name, Validators.required)
@@ -67,7 +67,7 @@ export class SampleFormComponent implements OnInit {
 				}
 			});
 
-		this.leveForm = this.autoForm.CreateNew<Level01>();
+		this.leveForm = this.autoForm.createNew<Level01>();
 
 		this.leveForm
 			.addValidator(c => c.level02.level03.level03Value)
@@ -116,4 +116,5 @@ export class SampleFormComponent implements OnInit {
 		console.log(test03.getMessages());
 		console.log(test03.getMessages(ExecuteMessageType.Warning));
 	}
+
 }

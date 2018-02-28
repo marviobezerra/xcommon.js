@@ -80,13 +80,17 @@ $justifyOptions: start, end, center, between, around;
   }
 }
 @mixin xcommon-fullbody() {
-  .viewport,
-  body,
   html {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
     min-width: 100%;
     min-height: 100%;
     margin: 0;
     padding: 0;
+    display: flex;
   }
 }
 @mixin xcommon-reset() {
@@ -231,7 +235,16 @@ $justifyOptions: start, end, center, between, around;
     outline: none;
   }
 
-  * {
+  *,
+  *:after,
+  *:before {
     box-sizing: border-box;
   }
+}
+@mixin host-flex-direction($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+@mixin host-flex() {
+  flex: 1 0 0;
 }

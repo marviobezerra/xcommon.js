@@ -1,0 +1,9 @@
+@import '../../src/styles/layout-full.scss';
+
+@include xcommon-reset();
+@include xcommon-layout-full();
+@include xcommon-fullbody();
+
+* {
+	font-family: 'Roboto', sans-serif;
+}

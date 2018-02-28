@@ -1,76 +1,72 @@
 ﻿@import './functions.scss';
-
 @mixin mixin-content($name) {
-    [#{$name}="start"] {
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-    [#{$name}="center"] {
-        align-items: center;
-        justify-content: center;
-    }
-    [#{$name}="end"] {
-        align-items: flex-end;
-        justify-content: flex-end;
-    }
-    @each $align in $alignOptions {
-        @each $justify in $justifyOptions {
-            [#{$name}="#{$align} #{$justify}"] {
-                align-items: content-translate($align, false);
-                justify-content: content-translate($justify, true);
-            }
-        }
-    }
-}
+  [#{$name}="start"] {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 
+  [#{$name}="center"] {
+    align-items: center;
+    justify-content: center;
+  }
+
+  [#{$name}="end"] {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  @each $align in $alignOptions {
+     @each $justify in $justifyOptions{
+      [#{$name}="#{$align} #{$justify}"] {
+        align-items: content-translate($align, false);
+        justify-content: content-translate($justify, true);
+      }
+    }
+  }
+}
 @mixin mixin-flex($name) {
-	[#{$name}] {
-		flex: 1 0 0;
-	}
+  [#{$name}] {
+    flex: 1 0 0;
+  }
 }
-
 @mixin mixin-layout($name) {
-    [#{$name}="row"] {
-        display: flex;
-        flex-direction: row;
-    }
-    [#{$name}="column"] {
-        display: flex;
-        flex-direction: column;
-    }
-}
+  [#{$name}="row"] {
+    @include host-flex-direction(row)
+  }
 
+  [#{$name}="column"] {
+    @include host-flex-direction(column)
+  }
+}
 @mixin mixin-show($name) {
-	[#{$name}] {
-		display: initial !important;
-	}
+  [#{$name}] {
+    display: initial !important;
+  }
 }
-
 @mixin mixin-hide($name) {
-    [#{$name}] {
-        display: none !important;
-    }
+  [#{$name}] {
+    display: none !important;
+  }
 }
-
 @mixin mixin-wrap($name) {
-    [#{$name}="wrap"] {
-        flex-wrap: wrap;
-    }
-    [#{$name}="nowrap"] {
-        flex-wrap: nowrap;
-    }
-    [#{$name}="reverse"] {
-        flex-wrap: wrap-reverse;
-    }
-}
+  [#{$name}="wrap"] {
+    flex-wrap: wrap;
+  }
 
+  [#{$name}="nowrap"] {
+    flex-wrap: nowrap;
+  }
+
+  [#{$name}="reverse"] {
+    flex-wrap: wrap-reverse;
+  }
+}
 @mixin mixin-shadow($name) {
-    [#{$name}] {
-        box-shadow: shadow-bottom(2), shadow-top(2);
+  [#{$name}] {
+    box-shadow: shadow-bottom(2), shadow-top(2);
+  }
+  @for $i from 1 through 5 {
+    [#{$name}="#{$i}"] {
+      box-shadow: shadow-bottom($i), shadow-top($i);
     }
-    @for $i from 1 through 5 {
-        [#{$name}="#{$i}"] {
-            box-shadow: shadow-bottom($i), shadow-top($i);
-        }
-    }
+  }
 }
