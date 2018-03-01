@@ -2,7 +2,7 @@
 	"name": "xcommon",
 	"author": "Márvio André Bezerra Silverio",
 	"license": "ISC",
-	"version": "0.0.27",
+	"version": "0.0.28",
 	"description": "XCommon tools for TypeScript",
 	"main": "./dist/index.umd.js",
 	"typings": "./dist/index.d.ts",
@@ -26,11 +26,12 @@
 		}
 	],
 	"scripts": {
-		"clean": "rimraf tmp && rimraf dist && rimraf styles",
-		"deploy": "npm run build && npm publish",
-		"build": "npm run clean && npm run build:esm && npm run build:umd && npm run build:css",
+		"clean": "rimraf tmp && rimraf dist",
+		"deploy": "npm run build && cd dist && npm publish",
+		"build": "npm run clean && npm run build:esm && npm run build:umd && npm run build:css && npm run build:pos",
 		"build:esm": "gulp inline-templates && npm run build:ng",
-		"build:css": "xcopy src\\styles\\* styles\\ /E",
+		"build:css": "xcopy src\\styles\\* dist\\styles\\ /E",
+		"build:pos": "copy package.json dist\\package.json",
 		"build:umd": "webpack --config webpack.umd.ts",
 		"build:ng": "node_modules/.bin/ngc -p tsconfig-aot.json"
 	},

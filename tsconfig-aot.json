@@ -23,7 +23,10 @@
 		]
 	},
 	"files": [
-		"./tmp/src-inlined/index.ts"
+		"./tmp/src-inlined/authentication/index.ts",
+		"./tmp/src-inlined/autoform/index.ts",
+		"./tmp/src-inlined/common/index.ts",
+		"./tmp/src-inlined/entity/index.ts"
 	],
 	"angularCompilerOptions": {
 		"genDir": "dist",

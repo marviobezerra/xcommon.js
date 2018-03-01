@@ -1,43 +1,45 @@
-import * as webpack from "webpack";
-import * as path from "path";
-import * as fs from "fs";
-import * as angularExternals from "webpack-angular-externals";
-import * as rxjsExternals from "webpack-rxjs-externals";
+import * as webpack from 'webpack';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as angularExternals from 'webpack-angular-externals';
+import * as rxjsExternals from 'webpack-rxjs-externals';
 
-const pkg = JSON.parse(fs.readFileSync("./package.json").toString());
+const pkg = JSON.parse(fs.readFileSync('./package.json').toString());
 
 export default {
 	entry: {
-		"index.umd": "./src/index.ts",
-		"index.umd.min": "./src/index.ts"
+		authentication: './src/authentication/index.ts',
+		autoform: './src/autoform/index.ts',
+		common: './src/common/index.ts',
+		entity: './src/entity/index.ts'
 	},
 	output: {
-		path: path.join(__dirname, "dist"),
-		filename: "[name].js",
-		libraryTarget: "umd",
-		library: "xcommon.js"
+		path: path.join(__dirname, 'dist'),
+		filename: '[name].js',
+		libraryTarget: 'umd',
+		library: 'xcommon.js'
 	},
 	resolve: {
-		extensions: [".ts", ".js", ".json"]
+		extensions: ['.ts', '.js', '.json']
 	},
 	externals: [
 		angularExternals(),
 		rxjsExternals()
 	],
-	devtool: "source-map",
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
 				test: /\.ts$/,
 				use: [
 					{
-						loader: "awesome-typescript-loader",
+						loader: 'awesome-typescript-loader',
 						options: {
-							configFileName: "tsconfig.json"
+							configFileName: 'tsconfig.json'
 						}
 					},
 					{
-						loader: "angular2-template-loader"
+						loader: 'angular2-template-loader'
 					}
 				],
 				exclude: [
@@ -48,29 +50,29 @@ export default {
 
 			{
 				test: /\.json$/,
-				use: "json-loader"
+				use: 'json-loader'
 			},
 
 			{
 				test: /\.css$/,
-				use: ["to-string-loader", "css-loader"]
+				use: ['to-string-loader', 'css-loader']
 			},
 
 			{
 				test: /\.scss$/,
-				use: ["to-string-loader", "css-loader", "sass-loader"]
+				use: ['to-string-loader', 'css-loader', 'sass-loader']
 			},
 
 			{
 				test: /\.html$/,
-				use: "raw-loader"
+				use: 'raw-loader'
 			}
 		]
 	},
 	plugins: [
 		new webpack.ContextReplacementPlugin(
 			/angular(\\|\/)core(\\|\/)@angular/,
-			path.join(__dirname, "src")
+			path.join(__dirname, 'src')
 		),
 
 		new webpack.optimize.UglifyJsPlugin({

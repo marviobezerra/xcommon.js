@@ -1,20 +1,15 @@
 {
     "files.exclude": {
         ".editorconfig": true,
-        "wwwroot": true,
-        "tsconfig*.json": true,
+        "tsconfig*.json": false,
         "webpack.config.ts": false,
         "**/.git*": true,
         ".npmignore": true,
-        "**/.svn": true,
-        "**/.hg": true,
         "**/node_modules": true,
         "tslint.json": false,
 		"package-lock.json": true,
-		"dist": true,
-		"tmp": true,
-		"gulpfile.js": true,
-		"styles": true,
+		"dist": false,
+		"gulpfile.js": false,
 		"webpack.umd.ts": false
     },
     "editor.autoIndent": true,
